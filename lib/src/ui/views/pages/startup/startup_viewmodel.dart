@@ -23,7 +23,7 @@ class StartupViewModel extends BaseViewModel {
     //     _sharedPreferences.getBool('isFirstOpenAfterInstallation') ?? true;
     // final bool isUserLoggedIn = _authenticationService.isUserLoggedIn;
 
-    String routeToNavigate = Routes.homePage;
+    String routeToNavigate = Routes.signinPage;
 
     // if (isAppFirstTimeInstalled) {
     //   // routeToNavigate = Routes.onBoardingScreen;
