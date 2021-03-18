@@ -58,8 +58,10 @@ class SigninPage extends StatelessWidget {
                 ),
                 SizedBox(height: 15),
                 GRoundedButton(
-                  onPressed: () => model.navigateTo(Routes.otpPage),
+                  onPressed: () =>
+                      model.navigateTo(Routes.accessLocationPermissionPage),
                   color: ThemeColors.primary,
+                  textColor: ThemeColors.white,
                   text: "Sign In",
                 ),
                 SizedBox(height: 25),
