@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 class UserProfile {
   String uid;
   String fullName;
-  String username;
   String email;
   String phone;
   String avatarUrl;
@@ -13,7 +12,6 @@ class UserProfile {
   UserProfile({
     this.uid,
     this.fullName,
-    @required this.username,
     @required this.email,
     this.phone,
     this.avatarUrl,
@@ -26,7 +24,6 @@ class UserProfile {
     return UserProfile(
       uid: uid,
       fullName: map['fullName'] as String,
-      username: map['username'] as String,
       email: map['email'] as String,
       phone: map['phone'] as String,
       avatarUrl: map['avatarUrl'] as String,
@@ -42,7 +39,6 @@ class UserProfile {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'fullName': this.fullName,
-      'username': this.username,
       'email': this.email,
       'phone': this.phone,
       'avatarUrl': this.avatarUrl,
