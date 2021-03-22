@@ -9,7 +9,7 @@ import 'package:customer/src/ui/views/pages/auth/search_location_page.dart';
 @MaterialAutoRouter(routes: [
   MaterialRoute(page: StartupPage),
   MaterialRoute(page: HomePage),
-  MaterialRoute(page: SigninPage),
+  MaterialRoute(page: SignInPage),
   MaterialRoute(page: OtpPage),
   MaterialRoute(page: AccessLocationPermissionPage),
   MaterialRoute(page: SearchLocationPage),
