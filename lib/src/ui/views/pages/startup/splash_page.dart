@@ -1,7 +1,8 @@
-import 'package:customer/src/ui/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:velocity_x/velocity_x.dart';
+
+import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/app/gets_extensions.dart';
 
 class SplashPage extends StatelessWidget {
   @override

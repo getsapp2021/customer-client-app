@@ -5,9 +5,10 @@ import 'package:customer/src/ui/views/widgets/countdown_timer.dart';
 import 'package:stacked/stacked.dart';
 
 class OtpPage extends StatelessWidget {
+  final String countryCode;
+  final String phoneNumber;
 
-  final String countryCode = "+91";
-  final String mobileNumber = "9824343803";
+  OtpPage({this.countryCode, this.phoneNumber});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class OtpPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(left: width / 20.0),
                 child: Text(
-                  "$countryCode $mobileNumber",
+                  "$countryCode $phoneNumber",
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
@@ -116,7 +117,7 @@ class OtpPage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    CountDownTimer(
+                    GCountDownTimer(
                       secondsRemaining: model.secondsToWait,
                       whenTimeExpires: model.timeExpired,
                       countDownTimerStyle: TextStyle(

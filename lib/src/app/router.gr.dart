@@ -9,9 +9,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../ui/views/pages/auth/access_location_permission_page.dart';
+import '../ui/views/pages/auth/edit_profile_page.dart';
 import '../ui/views/pages/auth/otp_page.dart';
-import '../ui/views/pages/auth/search_location_page.dart';
 import '../ui/views/pages/auth/signin_page.dart';
 import '../ui/views/pages/home/home_page.dart';
 import '../ui/views/pages/startup/startup_page.dart';
@@ -21,16 +20,13 @@ class Routes {
   static const String homePage = '/home-page';
   static const String signInPage = '/sign-in-page';
   static const String otpPage = '/otp-page';
-  static const String accessLocationPermissionPage =
-      '/access-location-permission-page';
-  static const String searchLocationPage = '/search-location-page';
+  static const String editProfilePage = '/edit-profile-page';
   static const all = <String>{
     startupPage,
     homePage,
     signInPage,
     otpPage,
-    accessLocationPermissionPage,
-    searchLocationPage,
+    editProfilePage,
   };
 }
 
@@ -42,9 +38,7 @@ class Router extends RouterBase {
     RouteDef(Routes.homePage, page: HomePage),
     RouteDef(Routes.signInPage, page: SignInPage),
     RouteDef(Routes.otpPage, page: OtpPage),
-    RouteDef(Routes.accessLocationPermissionPage,
-        page: AccessLocationPermissionPage),
-    RouteDef(Routes.searchLocationPage, page: SearchLocationPage),
+    RouteDef(Routes.editProfilePage, page: EditProfilePage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -68,22 +62,33 @@ class Router extends RouterBase {
       );
     },
     OtpPage: (data) {
+      final args = data.getArgs<OtpPageArguments>(
+        orElse: () => OtpPageArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => OtpPage(),
+        builder: (context) => OtpPage(
+          countryCode: args.countryCode,
+          phoneNumber: args.phoneNumber,
+        ),
         settings: data,
       );
     },
-    AccessLocationPermissionPage: (data) {
+    EditProfilePage: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => AccessLocationPermissionPage(),
-        settings: data,
-      );
-    },
-    SearchLocationPage: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => SearchLocationPage(),
+        builder: (context) => EditProfilePage(),
         settings: data,
       );
     },
   };
+}
+
+/// ************************************************************************
+/// Arguments holder classes
+/// *************************************************************************
+
+/// OtpPage arguments holder class
+class OtpPageArguments {
+  final String countryCode;
+  final String phoneNumber;
+  OtpPageArguments({this.countryCode, this.phoneNumber});
 }

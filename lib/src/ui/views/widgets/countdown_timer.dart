@@ -1,9 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 
-class CountDownTimer extends StatefulWidget {
-  const CountDownTimer({
+class GCountDownTimer extends StatefulWidget {
+  const GCountDownTimer({
     Key key,
     int secondsRemaining,
     this.countDownTimerStyle,
@@ -17,14 +15,13 @@ class CountDownTimer extends StatefulWidget {
   final Function countDownFormatter;
   final TextStyle countDownTimerStyle;
 
-  State createState() => new _CountDownTimerState();
+  State createState() => new _GCountDownTimerState();
 }
 
-class _CountDownTimerState extends State<CountDownTimer>
+class _GCountDownTimerState extends State<GCountDownTimer>
     with TickerProviderStateMixin {
   AnimationController _controller;
   Duration duration;
-
 
   String formatHHMMSS(int seconds) {
     int hours = (seconds / 3600).truncate();
@@ -41,7 +38,6 @@ class _CountDownTimerState extends State<CountDownTimer>
 
     return "$hoursStr:$minutesStr:$secondsStr";
   }
-
 
   String get timerDisplayString {
     Duration duration = _controller.duration * _controller.value;
@@ -62,14 +58,15 @@ class _CountDownTimerState extends State<CountDownTimer>
     );
     _controller.reverse(from: widget.secondsRemaining.toDouble());
     _controller.addStatusListener((status) {
-      if (status == AnimationStatus.completed || status == AnimationStatus.dismissed) {
+      if (status == AnimationStatus.completed ||
+          status == AnimationStatus.dismissed) {
         widget.whenTimeExpires();
       }
     });
   }
 
   @override
-  void didUpdateWidget(CountDownTimer oldWidget) {
+  void didUpdateWidget(GCountDownTimer oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.secondsRemaining != oldWidget.secondsRemaining) {
       setState(() {
@@ -100,13 +97,15 @@ class _CountDownTimerState extends State<CountDownTimer>
   @override
   Widget build(BuildContext context) {
     return new Center(
-        child: AnimatedBuilder(
-            animation: _controller,
-            builder: (_, Widget child) {
-              return Text(
-                timerDisplayString,
-                style: widget.countDownTimerStyle,
-              );
-            }));
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (_, Widget child) {
+          return Text(
+            timerDisplayString,
+            style: widget.countDownTimerStyle,
+          );
+        },
+      ),
+    );
   }
 }

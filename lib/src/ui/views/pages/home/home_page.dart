@@ -1,79 +1,27 @@
+import 'package:customer/src/app/locator.dart';
+import 'package:customer/src/core/services/authentication_service.dart';
 import 'package:customer/src/ui/utils/colors.dart';
-import 'package:customer/src/ui/views/widgets/category_item.dart';
-import 'package:customer/src/ui/views/widgets/store_item.dart';
 import 'package:flutter/material.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class HomePage extends StatelessWidget {
+  final AuthenticationService _authenticationService =
+      locator<AuthenticationService>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Home Page",
+          "Home Page: ",
           style: TextStyle(color: ThemeColors.white),
         ),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.exit_to_app),
+              onPressed: () => _authenticationService.signOut())
+        ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 70,
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.wallet_membership,
-                    size: 30,
-                  ).p16(),
-                  "Wallet".text.xl2.make(),
-                  SizedBox(width: 140),
-                  "Rs199.99".text.xl3.make().p16(),
-                ],
-              ),
-            ),
-            Container(
-              height: 120,
-              child: Row(
-                children: [
-                  Column(
-                    children: [CircleAvatar().wh(60, 60), "Stores".text.make()],
-                  ).p16(),
-                  Column(
-                    children: [
-                      CircleAvatar().wh(60, 60),
-                      "Services".text.make()
-                    ],
-                  ).p16(),
-                  Column(
-                    children: [CircleAvatar().wh(60, 60), "Food".text.make()],
-                  ).p16(),
-                  Column(
-                    children: [
-                      CircleAvatar().wh(60, 60),
-                      "Hyperlocal".text.make()
-                    ],
-                  ).p16(),
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                "Stores near you".text.xl2.make(),
-                Icon(Icons.arrow_right),
-              ],
-            ).px16(),
-            StoreItem().px16(),
-            SizedBox(height: 30),
-            Row(
-              children: [
-                "Stores Categories".text.xl2.make(),
-                Icon(Icons.arrow_right),
-              ],
-            ).px16(),
-            CategoryItem().px16(),
-          ],
-        ),
+      body: Center(
+        child: Text("Home Page"),
       ),
     );
   }

@@ -1,57 +1,38 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:customer/src/app/locator.dart';
 import 'package:customer/src/core/errors/failure.dart';
 import 'package:customer/src/core/models/user_profile.dart';
+import 'package:customer/src/core/services/firestore_service.dart';
 import 'package:customer/src/core/utils/constants/firebase/firebase_storage_buckets.dart';
 import 'package:customer/src/core/utils/constants/firebase/firestore_collections.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class UserProfileService {
   // Firebase instances
-  static FirebaseFirestore _firebaseFireStore = FirebaseFirestore.instance;
   static FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
 
-  // References
-  final CollectionReference _userProfiles =
-      _firebaseFireStore.collection(FireStoreCollections.userProfiles);
+  FirestoreService _firestoreService = locator<FirestoreService>();
 
   final _userProfileAvatarBucket =
       _firebaseStorage.ref(FirebaseStorageBuckets.userProfileAvatars);
 
-  Future<UserProfile> getUserProfile(String uid) async {
-    try {
-      final snapshot = await _userProfiles.doc(uid).get();
-      return UserProfile.fromMap(snapshot.data(), uid);
-    } on FirebaseException catch (e) {
-      print("A firebase exception has occured: $e");
-      throw Failure(message: e.message);
-    } on FormatException catch (e) {
-      print("A FormatException has occured: $e");
-      throw Failure(
-          message: "could not get user profile, please try again later!");
-    }
-  }
+  String _getUserProfileDocumnetPath(String uid) =>
+      "${FireStoreCollections.userProfiles}/$uid";
 
-  /// [createUserProfile] has same functionality as [updateUserProfile].
-  Future<bool> createUserProfile(UserProfile userProfile) =>
-      updateUserProfile(userProfile..createdAt = DateTime.now());
+  Future<UserProfile> getUserProfile(String uid) =>
+      _firestoreService.getDocumnet(
+        _getUserProfileDocumnetPath(uid),
+        (snapshot) => UserProfile.fromSnapshot(snapshot),
+      );
 
-  Future<bool> updateUserProfile(UserProfile userProfile) async {
-    try {
-      userProfile.updatedAt = DateTime.now();
-      await _userProfiles.doc(userProfile.uid).set(userProfile.toMap()).timeout(
-            Duration(seconds: 15),
-            onTimeout: () => throw Failure(message: "Retry, timeout exceeded!"),
-          );
-      return true;
-    } on FirebaseException catch (e) {
-      print("A firebase exception has occured: $e");
-      throw Failure(message: e.message);
-    } on FormatException catch (e) {
-      print("A FormatException has occured: $e");
-      throw Failure(
-          message: "could not get user profile, please try again later!");
-    }
+  Future<void> createUserProfile(UserProfile userProfile) =>
+      _firestoreService.updateData(
+          _getUserProfileDocumnetPath(userProfile.uid), userProfile.toMap());
+
+  Future<void> updateUserProfile(UserProfile userProfile) {
+    return _firestoreService.setData(
+        _getUserProfileDocumnetPath(userProfile.uid), userProfile.toMap());
   }
 
   Future<String> uploadAvatarImageAndGetDownloadableUrl(
@@ -66,17 +47,11 @@ class UserProfileService {
     }
   }
 
-  Future<bool> updateAvatarImageInUserProfile(String uid, String url) async {
-    try {
-      await _userProfiles
-          .doc(uid)
-          .update({_FirestoreUserProfileKeys.avatarUrl: url});
-      return true;
-    } on FirebaseException catch (e) {
-      print("A firebase exception has occured: $e");
-      throw Failure(message: e.message);
-    }
-  }
+  Future<void> updateAvatarImageInUserProfile(String uid, String url) =>
+      _firestoreService.updateData(
+        FireStoreCollections.userProfiles,
+        {_FirestoreUserProfileKeys.avatarUrl: url},
+      );
 
   Future<void> deleteAvatarImage(String imageUrl) async {
     // TODO: check for required error handling

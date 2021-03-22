@@ -1,4 +1,4 @@
-import 'file:///C:/Users/D.V.%20Pandya/Desktop/All%20folder/GETS%20TECH/Source/customer-client-app/lib/src/ui/views/pages/auth/widgets/profile_textfield.dart';
+import 'package:customer/src/ui/views/pages/auth/widgets/profile_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:customer/src/ui/utils/colors.dart';
 import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
@@ -42,7 +42,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
-
                 ),
               ),
             ),
@@ -56,32 +55,29 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
             ),
             ProfileTextField(
-                icon:Icon(Icons.person_outline),
-                hintText: "Full Name",
-                textEditingController: nameController,
-              ),
-
+              icon: Icon(Icons.person_outline),
+              hintText: "Full Name",
+              textEditingController: nameController,
+            ),
             ProfileTextField(
-              icon:Icon(Icons.email_outlined),
+              icon: Icon(Icons.email_outlined),
               hintText: "Email",
               textEditingController: emailController,
             ),
             ProfileTextField(
-              icon:Icon(Icons.phone_android_outlined),
+              icon: Icon(Icons.phone_android_outlined),
               hintText: "+91 9824343803",
               textEditingController: mobileController,
             ),
             ProfileTextField(
-              icon:Icon(Icons.location_on_outlined),
+              icon: Icon(Icons.location_on_outlined),
               hintText: "Address",
               textEditingController: addressController,
             ),
-
-
           ],
         ),
       ),
-      bottomNavigationBar:    Padding(
+      bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(15),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -96,7 +92,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 text: "Save Profile",
               ),
             ),
-            SizedBox(width: 20,),
+            SizedBox(
+              width: 20,
+            ),
             Flexible(
               flex: 3,
               child: GRoundedButton(
@@ -107,8 +105,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ),
           ],
         ),
-      )
-      ,
+      ),
     );
   }
 }

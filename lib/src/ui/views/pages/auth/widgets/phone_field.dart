@@ -1,11 +1,9 @@
-library intl_phone_field;
-
-import 'package:customer/src/ui/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'file:///C:/Users/D.V.%20Pandya/Desktop/All%20folder/GETS%20TECH/Source/customer-client-app/lib/src/core/models/phone_number.dart';
-import 'file:///C:/Users/D.V.%20Pandya/Desktop/All%20folder/GETS%20TECH/Source/customer-client-app/lib/src/core/utils/constants/countries.dart';
+import 'package:customer/src/core/models/phone_number.dart';
+import 'package:customer/src/core/utils/constants/countries.dart';
+import 'package:customer/src/ui/utils/colors.dart';
 
 class IntlPhoneField extends StatefulWidget {
   final bool obscureText;
@@ -227,8 +225,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
                       children: <Widget>[
                         ListTile(
                           leading: Image.asset(
-                            'assets/flags/${filteredCountries[index]['code'].toLowerCase()}.png',
-                            package: 'intl_phone_field',
+                            'assets/images/flags/${filteredCountries[index]['code'].toLowerCase()}.png',
                             width: 32,
                           ),
                           title: Text(
@@ -321,9 +318,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
         width: 90,
         decoration: BoxDecoration(
           border: Border.all(color: ThemeColors.primary, width: 2),
-          borderRadius: BorderRadius.all(
-            Radius.circular(50)
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(50)),
         ),
         child: InkWell(
           borderRadius: widget.dropdownDecoration.borderRadius,
@@ -344,8 +339,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
                   child: CircleAvatar(
                     radius: 50,
                     backgroundImage: AssetImage(
-                      'assets/flags/${_selectedCountry['code'].toLowerCase()}.png',
-                      package: 'intl_phone_field',
+                      'assets/images/flags/${_selectedCountry['code'].toLowerCase()}.png',
                     ),
                   ),
                 ),

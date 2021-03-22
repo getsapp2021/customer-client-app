@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
 class UserProfile {
@@ -6,33 +7,31 @@ class UserProfile {
   String email;
   String phone;
   String avatarUrl;
-  DateTime createdAt;
-  DateTime updatedAt;
 
   UserProfile({
-    this.uid,
+    @required this.uid,
     this.fullName,
-    @required this.email,
-    this.phone,
+    this.email,
+    @required this.phone,
     this.avatarUrl,
-    this.createdAt,
-    this.updatedAt,
   });
 
-  factory UserProfile.fromMap(Map<String, dynamic> map, String uid) {
+  // Firebase Firestore document snapshot to UserProfile
+  factory UserProfile.fromSnapshot(DocumentSnapshot snapshot) {
+    if (snapshot == null) return null;
+    Map<String, dynamic> map = snapshot.data();
+    map["uid"] = snapshot.id;
+    return UserProfile.fromMap(map);
+  }
+
+  factory UserProfile.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
     return UserProfile(
-      uid: uid,
+      uid: map['uid'] as String,
       fullName: map['fullName'] as String,
       email: map['email'] as String,
       phone: map['phone'] as String,
       avatarUrl: map['avatarUrl'] as String,
-      createdAt: map['createdAt'] == null
-          ? null
-          : DateTime.parse(map['createdAt'] as String),
-      updatedAt: map['updatedAt'] == null
-          ? null
-          : DateTime.parse(map['updatedAt'] as String),
     );
   }
 
@@ -42,8 +41,6 @@ class UserProfile {
       'email': this.email,
       'phone': this.phone,
       'avatarUrl': this.avatarUrl,
-      'createdAt': this.createdAt?.toIso8601String(),
-      'updatedAt': this.updatedAt?.toIso8601String(),
     };
   }
 }

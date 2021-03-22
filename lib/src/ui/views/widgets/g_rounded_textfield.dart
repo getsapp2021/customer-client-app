@@ -1,6 +1,5 @@
 import 'package:customer/src/ui/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class GRoundedTextField extends StatelessWidget {
   final Color fillColor;
@@ -20,7 +19,7 @@ class GRoundedTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: 60,
-        width: 0.9 * context.mq.size.width,
+        width: 300,
         child: TextField(
           controller: controller,
           onTap: () {

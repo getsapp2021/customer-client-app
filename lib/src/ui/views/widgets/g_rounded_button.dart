@@ -1,6 +1,5 @@
 import 'package:customer/src/ui/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class GRoundedButton extends StatelessWidget {
   final Color color;
@@ -23,7 +22,6 @@ class GRoundedButton extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
 
     return InkWell(
-
       onTap: onPressed,
       child: Container(
         height: height * 0.065,
@@ -33,12 +31,7 @@ class GRoundedButton extends StatelessWidget {
             border:
                 Border.all(color: borderColor != null ? borderColor : color)),
         child: Center(
-          child: icon == null
-              ? "$text"
-                  .text
-                  .color(textColor != null ? textColor : ThemeColors.black)
-                  .make()
-              : icon,
+          child: icon == null ? Text("$text") : icon,
         ),
       ),
     );
