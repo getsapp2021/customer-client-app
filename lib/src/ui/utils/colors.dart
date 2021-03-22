@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 class ThemeColors {
   //App
   static const Color primary = Color(0xff00C56F);
@@ -8,6 +10,7 @@ class ThemeColors {
   static const Color background = Color(0xffF9FAF9);
 
   static const Color white = Color(0xffffffff);
-  static const Color black = Color(0xff000000);
   static const Color gray = Color(0xff676767);
+  static const Color black = Colors.black;
+  static const Color transparent = Colors.transparent;
 }
