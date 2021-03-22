@@ -19,7 +19,7 @@ import '../ui/views/pages/startup/startup_page.dart';
 class Routes {
   static const String startupPage = '/startup-page';
   static const String homePage = '/home-page';
-  static const String signinPage = '/signin-page';
+  static const String signInPage = '/sign-in-page';
   static const String otpPage = '/otp-page';
   static const String accessLocationPermissionPage =
       '/access-location-permission-page';
@@ -27,7 +27,7 @@ class Routes {
   static const all = <String>{
     startupPage,
     homePage,
-    signinPage,
+    signInPage,
     otpPage,
     accessLocationPermissionPage,
     searchLocationPage,
@@ -40,7 +40,7 @@ class Router extends RouterBase {
   final _routes = <RouteDef>[
     RouteDef(Routes.startupPage, page: StartupPage),
     RouteDef(Routes.homePage, page: HomePage),
-    RouteDef(Routes.signinPage, page: SigninPage),
+    RouteDef(Routes.signInPage, page: SignInPage),
     RouteDef(Routes.otpPage, page: OtpPage),
     RouteDef(Routes.accessLocationPermissionPage,
         page: AccessLocationPermissionPage),
@@ -61,9 +61,9 @@ class Router extends RouterBase {
         settings: data,
       );
     },
-    SigninPage: (data) {
+    SignInPage: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => SigninPage(),
+        builder: (context) => SignInPage(),
         settings: data,
       );
     },

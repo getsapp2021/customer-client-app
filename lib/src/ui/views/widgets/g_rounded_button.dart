@@ -9,7 +9,6 @@ class GRoundedButton extends StatelessWidget {
   final Icon icon;
   final String text;
   final Function onPressed;
-
   const GRoundedButton(
       {Key key,
       this.color,
@@ -21,10 +20,13 @@ class GRoundedButton extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+
     return InkWell(
+
       onTap: onPressed,
       child: Container(
-        height: 50,
+        height: height * 0.065,
         decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(50),
