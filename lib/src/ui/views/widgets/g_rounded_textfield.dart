@@ -19,7 +19,7 @@ class GRoundedTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 60,
+        height: 40,
         width: 0.9 * context.mq.size.width,
         child: TextField(
           controller: controller,
@@ -27,6 +27,7 @@ class GRoundedTextField extends StatelessWidget {
             ontap();
           },
           decoration: InputDecoration(
+              contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
               prefixIcon: fieldIcon,
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50),

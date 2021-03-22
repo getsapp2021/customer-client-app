@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import '../ui/views/pages/auth/access_location_permission_page.dart';
 import '../ui/views/pages/auth/otp_page.dart';
 import '../ui/views/pages/auth/search_location_page.dart';
+import '../ui/views/pages/auth/search_location_result_detail_page.dart';
 import '../ui/views/pages/auth/signin_page.dart';
 import '../ui/views/pages/home/home_page.dart';
 import '../ui/views/pages/startup/startup_page.dart';
@@ -24,6 +25,8 @@ class Routes {
   static const String accessLocationPermissionPage =
       '/access-location-permission-page';
   static const String searchLocationPage = '/search-location-page';
+  static const String searchLocationResultDetailPage =
+      '/search-location-result-detail-page';
   static const all = <String>{
     startupPage,
     homePage,
@@ -31,6 +34,7 @@ class Routes {
     otpPage,
     accessLocationPermissionPage,
     searchLocationPage,
+    searchLocationResultDetailPage,
   };
 }
 
@@ -45,6 +49,8 @@ class Router extends RouterBase {
     RouteDef(Routes.accessLocationPermissionPage,
         page: AccessLocationPermissionPage),
     RouteDef(Routes.searchLocationPage, page: SearchLocationPage),
+    RouteDef(Routes.searchLocationResultDetailPage,
+        page: SearchLocationResultDetailPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -82,6 +88,12 @@ class Router extends RouterBase {
     SearchLocationPage: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => SearchLocationPage(),
+        settings: data,
+      );
+    },
+    SearchLocationResultDetailPage: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => SearchLocationResultDetailPage(),
         settings: data,
       );
     },

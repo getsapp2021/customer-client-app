@@ -16,7 +16,7 @@ class _AccessLocationPermissionPageState
     extends State<AccessLocationPermissionPage> {
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<AccessLocationPermissionViewModel>.reactive(
+    return ViewModelBuilder<AccessLocationPermissionViewModel>.nonReactive(
         viewModelBuilder: () => AccessLocationPermissionViewModel(),
         builder: (context, model, child) => Scaffold(
               appBar: AppBar(
@@ -47,7 +47,7 @@ class _AccessLocationPermissionPageState
                       ),
                     ),
                     SizedBox(height: 20),
-                    GRoundedButton( 
+                    GRoundedButton(
                       onPressed: () =>
                           model.navigateTo(Routes.searchLocationPage),
                       color: ThemeColors.white,

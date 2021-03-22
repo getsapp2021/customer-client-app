@@ -8,6 +8,7 @@ class GRoundedButton extends StatelessWidget {
   final Color textColor;
   final Icon icon;
   final String text;
+  final TextStyle textStyle;
   final Function onPressed;
 
   const GRoundedButton(
@@ -17,6 +18,7 @@ class GRoundedButton extends StatelessWidget {
       this.text,
       this.borderColor,
       this.textColor,
+      this.textStyle,
       @required this.onPressed})
       : super(key: key);
   @override
@@ -35,6 +37,7 @@ class GRoundedButton extends StatelessWidget {
               ? "$text"
                   .text
                   .color(textColor != null ? textColor : ThemeColors.black)
+                  .textStyle(textStyle)
                   .make()
               : icon,
         ),

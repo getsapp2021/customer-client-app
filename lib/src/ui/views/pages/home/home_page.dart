@@ -1,5 +1,6 @@
 import 'package:customer/src/ui/utils/colors.dart';
 import 'package:customer/src/ui/views/widgets/category_item.dart';
+import 'package:customer/src/ui/views/widgets/g_rounded_textfield.dart';
 import 'package:customer/src/ui/views/widgets/store_item.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -9,10 +10,17 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Home Page",
-          style: TextStyle(color: ThemeColors.white),
-        ),
+        automaticallyImplyLeading: false,
+        actions: [
+          Flexible(
+              flex: 1,
+              child:
+                  GRoundedTextField().wh(0.5 * context.screenWidth, 40).px8()),
+          Flexible(
+              flex: 2,
+              child:
+                  GRoundedTextField().wh(0.7 * context.screenWidth, 40).px8())
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -21,40 +29,51 @@ class HomePage extends StatelessWidget {
             Container(
               height: 70,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
-                    Icons.wallet_membership,
-                    size: 30,
-                  ).p16(),
-                  "Wallet".text.xl2.make(),
-                  SizedBox(width: 140),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.wallet_membership,
+                        size: 30,
+                      ).p16(),
+                      "Wallet".text.xl2.make(),
+                    ],
+                  ),
+                  // SizedBox(width: 120),
                   "Rs199.99".text.xl3.make().p16(),
                 ],
               ),
             ),
             Container(
               height: 120,
-              child: Row(
-                children: [
-                  Column(
-                    children: [CircleAvatar().wh(60, 60), "Stores".text.make()],
-                  ).p16(),
-                  Column(
-                    children: [
-                      CircleAvatar().wh(60, 60),
-                      "Services".text.make()
-                    ],
-                  ).p16(),
-                  Column(
-                    children: [CircleAvatar().wh(60, 60), "Food".text.make()],
-                  ).p16(),
-                  Column(
-                    children: [
-                      CircleAvatar().wh(60, 60),
-                      "Hyperlocal".text.make()
-                    ],
-                  ).p16(),
-                ],
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    Column(
+                      children: [
+                        CircleAvatar().wh(60, 60),
+                        "Stores".text.make()
+                      ],
+                    ).p16(),
+                    Column(
+                      children: [
+                        CircleAvatar().wh(60, 60),
+                        "Services".text.make()
+                      ],
+                    ).p16(),
+                    Column(
+                      children: [CircleAvatar().wh(60, 60), "Food".text.make()],
+                    ).p16(),
+                    Column(
+                      children: [
+                        CircleAvatar().wh(60, 60),
+                        "Hyperlocal".text.make()
+                      ],
+                    ).p16(),
+                  ],
+                ),
               ),
             ),
             Row(
