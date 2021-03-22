@@ -7,7 +7,7 @@ import 'package:customer/src/ui/views/pages/auth/otp_page.dart';
 @MaterialAutoRouter(routes: [
   MaterialRoute(page: StartupPage),
   MaterialRoute(page: HomePage),
-  MaterialRoute(page: SigninPage),
+  MaterialRoute(page: SignInPage),
   MaterialRoute(page: OtpPage),
 ])
 class $Router {}
