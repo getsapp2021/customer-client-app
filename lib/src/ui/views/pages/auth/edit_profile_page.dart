@@ -15,42 +15,43 @@ class _EditProfilePageState extends State<EditProfilePage> {
   TextEditingController addressController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       backgroundColor: ThemeColors.background,
       appBar: AppBar(
+
         leading: GestureDetector(
           onTap: () {
             //put navigator
           },
-          child: Icon(Icons.arrow_back_ios),
+          child: Icon(Icons.arrow_back_ios,color: ThemeColors.black,),
         ),
-        backgroundColor: ThemeColors.primaryLight,
+        backgroundColor: ThemeColors.background,
         elevation: 0,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: width/25),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+              padding: EdgeInsets.symmetric(vertical: height/25, horizontal: width/21),
               child: Text(
                 "Profile Details",
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: width*0.062,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20.0),
+              padding: EdgeInsets.only(left: width/21.0),
               child: Text(
                 'Update your profile details',
                 style: TextStyle(
-                  fontSize: 17,
+                  fontSize: width*0.0425,
                 ),
               ),
             ),
@@ -78,7 +79,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(15),
+        padding:  EdgeInsets.all(width/25),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.max,

@@ -2,6 +2,7 @@ import 'package:customer/src/ui/utils/colors.dart';
 import 'package:customer/src/ui/utils/validators/auth_validator.dart';
 import 'package:customer/src/ui/views/pages/auth/signin_viewmodel.dart';
 import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter/material.dart';
 import 'widgets/phone_field.dart';
@@ -36,14 +37,21 @@ class SignInPage extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.fromLTRB(width / 20, 0, 0, 0),
                     alignment: Alignment.centerLeft,
-                    child: Text("Hey There!"),
+                    child: Text("Hey There!",style: TextStyle(
+                      fontSize: width * 0.060,
+                      fontWeight: FontWeight.bold,
+                    ),),
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(width / 20, 0, 0, 0),
                     alignment: Alignment.centerLeft,
                     child: Column(
                       children: [
-                        Text("Login with mobile number"),
+                        Text("Login with your mobile number",style: TextStyle(
+                          fontSize: width * 0.045,
+
+                        ),)
+                        ,
                       ],
                     ),
                   ),
@@ -94,7 +102,10 @@ class SignInPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Center(
+                  SizedBox(height: height * 0.065),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: width / 20),
                     child: Text(
                         "by signing in you agree to our \n Terms and Conditions and Service Policy."),
                   ),

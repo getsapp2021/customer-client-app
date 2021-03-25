@@ -36,7 +36,7 @@ class OtpPage extends StatelessWidget {
                 child: Text(
                   "Please enter the otp sent to:",
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: width * 0.038,
                   ),
                 ),
               ),
@@ -45,14 +45,14 @@ class OtpPage extends StatelessWidget {
                 child: Text(
                   "$countryCode $phoneNumber",
                   style: TextStyle(
-                    fontSize: 17,
+                    fontSize: width*0.045,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(
-                    top: height / 50, left: width / 13, right: width / 10),
+                    top: height / 50, left: width / 20, right: width / 10),
                 child: Form(
                   key: model.formKey,
                   child: TextFormField(
@@ -61,7 +61,7 @@ class OtpPage extends StatelessWidget {
                     cursorWidth: 3,
                     style: TextStyle(
                       color: ThemeColors.gray,
-                      fontSize: 40,
+                      fontSize: width*0.12,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.justify,
@@ -70,7 +70,7 @@ class OtpPage extends StatelessWidget {
                       hintText: "000000",
                       counterText: "",
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(top: 15),
+                      contentPadding: EdgeInsets.only(top: height/20),
                     ),
                     onSaved: (value) => model.otpText = value,
                   ),
@@ -80,11 +80,11 @@ class OtpPage extends StatelessWidget {
               Row(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: width / 12.0),
+                    padding: EdgeInsets.only(left: width / 20.0),
                     child: Text(
                       "Haven’t receive it yet?",
                       style: TextStyle(
-                        fontSize: 17,
+                        fontSize: width*0.045,
                       ),
                     ),
                   ),
@@ -93,13 +93,14 @@ class OtpPage extends StatelessWidget {
                   ),
                   // otpResend(),
                   GestureDetector(
+
                     child: Text(
                       "Resend OTP",
                       style: TextStyle(
                           color: !model.enableResendOtpButton
                               ? ThemeColors.gray
                               : ThemeColors.primary,
-                          fontSize: 17),
+                          fontSize: width*0.045),
                     ),
                     onTap:
                         model.enableResendOtpButton ? model.resetTimer : null,
@@ -107,13 +108,13 @@ class OtpPage extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(left: width / 12.0),
+                padding: EdgeInsets.only(left: width / 20.0),
                 child: Row(
                   children: [
                     Text(
                       "Request new code in ",
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: width*0.038,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
