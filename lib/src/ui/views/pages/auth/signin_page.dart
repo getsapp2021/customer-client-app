@@ -3,6 +3,7 @@ import 'package:customer/src/ui/utils/validators/auth_validator.dart';
 import 'package:customer/src/ui/views/pages/auth/signin_viewmodel.dart';
 import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter/material.dart';
 import 'widgets/phone_field.dart';
@@ -37,21 +38,25 @@ class SignInPage extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.fromLTRB(width / 20, 0, 0, 0),
                     alignment: Alignment.centerLeft,
-                    child: Text("Hey There!",style: TextStyle(
-                      fontSize: width * 0.060,
-                      fontWeight: FontWeight.bold,
-                    ),),
+                    child: Text(
+                      "Hey There!",
+                      style: TextStyle(
+                        fontSize: width * 0.060,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                   Container(
                     padding: EdgeInsets.fromLTRB(width / 20, 0, 0, 0),
                     alignment: Alignment.centerLeft,
                     child: Column(
                       children: [
-                        Text("Login with your mobile number",style: TextStyle(
-                          fontSize: width * 0.045,
-
-                        ),)
-                        ,
+                        Text(
+                          "Login with your mobile number",
+                          style: TextStyle(
+                            fontSize: width * 0.045,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -103,11 +108,64 @@ class SignInPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: height * 0.065),
-
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: width / 20),
-                    child: Text(
-                        "by signing in you agree to our \n Terms and Conditions and Service Policy."),
+                  Column(
+                    children: <Widget>[
+                      Text(
+                         "by signing in you agree to our ",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: width * 0.04,
+                            color: Colors.black,
+                          ),
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: "Terms and Conditions",
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {},
+                                    style: TextStyle(
+                                      fontSize: width * 0.04,
+                                      decoration: TextDecoration.underline,
+                                      color: ThemeColors.primary,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                text: " and ",
+                                style: TextStyle(
+                                  fontSize: width * 0.04,
+                                  color: Colors.black,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: "Service Policy.",
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {},
+                                    style: TextStyle(
+                                      fontSize: width * 0.04,
+                                      decoration: TextDecoration.underline,
+                                      color: ThemeColors.primary,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

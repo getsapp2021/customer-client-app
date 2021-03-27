@@ -31,7 +31,10 @@ class GRoundedButton extends StatelessWidget {
             border:
                 Border.all(color: borderColor != null ? borderColor : color)),
         child: Center(
-          child: icon == null ? Text("$text") : icon,
+          child: icon == null ? Text("$text",style: TextStyle(
+            color: ThemeColors.white,
+            fontWeight: FontWeight.bold
+          ),) : icon,
         ),
       ),
     );
