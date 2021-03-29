@@ -18,10 +18,34 @@ class SearchLocationResultDetailViewModel extends BaseViewModel {
   TextEditingController get buildNoController => _buildNoController;
   TextEditingController get landmarkController => _landmarkController;
   // GoogleMapController get gmapController => _gmapController;
-  
+
+  Set<Marker> markers = {};
+  Marker tmp;
+
+  void initialise(Coordinates coordinate) {
+    LatLng pos = LatLng(coordinate.latitude, coordinate.longitude);
+    tmp = Marker(
+      markerId: MarkerId("Initial Home"),
+      position: pos,
+      draggable: true,
+    );
+   markers.add(tmp);
+    getAddressFromCoordinates(coordinate);
+  }
+
   List<Address> address;
-    void onMapCreated(GoogleMapController controller) {
+  void onMapCreated(GoogleMapController controller) {
     gmapController = controller;
+  }
+
+  void addMarker(Marker newMarker) {
+    markers.add(newMarker);
+    notifyListeners();
+  }
+
+  void resetMarkers() {
+    markers = {};
+    notifyListeners();
   }
 
   void getAddressFromCoordinates(Coordinates pos) async {
@@ -32,7 +56,7 @@ class SearchLocationResultDetailViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void navigateTo (String routeName) {
+  void navigateTo(String routeName) {
     _navigationService.navigateTo(routeName);
   }
 }

@@ -8,6 +8,7 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoder/geocoder.dart';
 
 import '../ui/views/pages/auth/access_location_permission_page.dart';
 import '../ui/views/pages/auth/otp_page.dart';
@@ -92,10 +93,23 @@ class Router extends RouterBase {
       );
     },
     SearchLocationResultDetailPage: (data) {
+      final args =
+          data.getArgs<SearchLocationResultDetailPageArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => SearchLocationResultDetailPage(),
+        builder: (context) =>
+            SearchLocationResultDetailPage(coordinate: args.coordinate),
         settings: data,
       );
     },
   };
+}
+
+/// ************************************************************************
+/// Arguments holder classes
+/// *************************************************************************
+
+/// SearchLocationResultDetailPage arguments holder class
+class SearchLocationResultDetailPageArguments {
+  final Coordinates coordinate;
+  SearchLocationResultDetailPageArguments({@required this.coordinate});
 }

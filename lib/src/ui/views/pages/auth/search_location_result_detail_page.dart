@@ -1,38 +1,24 @@
-import 'package:customer/src/ui/utils/colors.dart';
-import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
-import 'package:customer/src/ui/views/widgets/g_rounded_textfield.dart';
-import 'package:geocoder/geocoder.dart';
-import 'package:velocity_x/velocity_x.dart';
-import 'package:customer/src/ui/views/pages/auth/search_location_result_detail_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoder/geocoder.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:stacked/stacked.dart';
+import 'package:velocity_x/velocity_x.dart';
+
 import 'package:customer/src/app/router.gr.dart';
+import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/views/pages/auth/search_location_result_detail_viewmodel.dart';
+import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
+import 'package:customer/src/ui/views/widgets/g_rounded_textfield.dart';
 
-class SearchLocationResultDetailPage extends StatefulWidget {
-  @override
-  _SearchLocationResultDetailPageState createState() =>
-      _SearchLocationResultDetailPageState();
-}
-
-class _SearchLocationResultDetailPageState
-    extends State<SearchLocationResultDetailPage> {
-  // GoogleMapController mapController;
-
-  final Set<Marker> markers = {};
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+class SearchLocationResultDetailPage extends StatelessWidget {
+  final Coordinates coordinate;
+  SearchLocationResultDetailPage({@required this.coordinate});
 
   @override
   Widget build(BuildContext context) {
-    int index = 0;
-    Coordinates coordinate;
-    return ViewModelBuilder.reactive(
+    return ViewModelBuilder<SearchLocationResultDetailViewModel>.reactive(
         viewModelBuilder: () => SearchLocationResultDetailViewModel(),
+        onModelReady: (model) => model.initialise(coordinate),
         builder: (context, model, child) => Scaffold(
               backgroundColor: ThemeColors.white,
               body: Column(
@@ -44,25 +30,27 @@ class _SearchLocationResultDetailPageState
                       height: 0.5 * context.screenHeight,
                       child: GoogleMap(
                         onMapCreated: model.onMapCreated,
-                        markers: Set.from(markers),
+                        markers: Set.from(model.markers),
                         initialCameraPosition: CameraPosition(
-                          target: LatLng(22.3072, 73.1812),
-                          zoom: 11.0,
+                          target:
+                              LatLng(coordinate.latitude, coordinate.longitude),
+                          zoom: 15.0,
                         ),
                         onTap: (pos) {
                           print("Position: $pos");
-                          coordinate = Coordinates(pos.latitude, pos.longitude);
+                          Coordinates tappedCoordinate =
+                              Coordinates(pos.latitude, pos.longitude);
+
                           Marker tmp = Marker(
-                            markerId: MarkerId("$index"),
+                            markerId: MarkerId("Home"),
                             position: pos,
                             draggable: true,
                             onTap: () {
-                              model.getAddressFromCoordinates(coordinate);
+                              model.getAddressFromCoordinates(tappedCoordinate);
                             },
                           );
-                          setState(() {
-                            markers.add(tmp);
-                          });
+                          model.resetMarkers();
+                          model.addMarker(tmp);
                         },
                       ),
                     ),

@@ -6,10 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:customer/src/app/router.gr.dart';
-import 'dart:convert';
-import 'package:uuid/uuid.dart';
-
-import 'package:http/http.dart';
 
 class SearchLocationPage extends StatefulWidget {
   @override
@@ -29,7 +25,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<SearchLocationViewModel>.reactive(
+    return ViewModelBuilder<SearchLocationViewModel>.nonReactive(
       viewModelBuilder: () => SearchLocationViewModel(),
       builder: (context, model, child) => Scaffold(
         appBar: PreferredSize(
@@ -48,11 +44,12 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
                   controller: _searchController,
                   ontap: () async {
                     print("On Tapped");
+                    FocusScope.of(context).requestFocus(FocusNode());
                     await showSearch(
                       context: context,
                       // we haven't created AddressSearch class
                       // this should be extending SearchDelegate
-                      delegate: AddressSearch(),
+                      delegate: AddressSearch(model),
                     );
                   },
                   fillColor: ThemeColors.white,
@@ -71,6 +68,9 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
 }
 
 class AddressSearch extends SearchDelegate {
+  final SearchLocationViewModel viewModel;
+
+  AddressSearch(this.viewModel);
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -102,30 +102,22 @@ class AddressSearch extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return ViewModelBuilder<SearchLocationViewModel>.reactive(
-      builder: (context, model, child) {
-        if (query == '') return Container();
-        model.input = query;
-        model.futureToRun();
-        return model.isBusy
+    if (query == '') return Container();
+    viewModel.input = query;
+    return FutureBuilder(
+      future: viewModel.fetchSuggestions(),
+      builder: (context, AsyncSnapshot<List<Suggestion>> snapshot) {
+        return !snapshot.hasData
             ? Center(child: CircularProgressIndicator())
-            : !model.dataReady
-                ? Container()
-                : ListView.builder(
-                    itemBuilder: (context, index) => ListTile(
-                      title: Text(model.data[index].description),
-                      onTap: () {
-                        // FocusScope.of(context).unfocus();
-
-                        // _searchController.text = model.data[index].description;
-                        // close(context, model.data[index]);
-                        model.navigateTo(Routes.searchLocationResultDetailPage);
-                      },
-                    ),
-                    itemCount: model.data.length,
-                  );
+            : ListView.builder(
+                itemBuilder: (context, index) => ListTile(
+                  title: Text(snapshot.data[index].description),
+                  onTap: () => viewModel.navigateToResultPage(snapshot.data[index].placeId)
+                  ,
+                ),
+                itemCount: snapshot.data.length,
+              );
       },
-      viewModelBuilder: () => SearchLocationViewModel(),
     );
   }
 }
