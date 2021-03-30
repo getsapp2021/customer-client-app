@@ -26,6 +26,7 @@ class GRoundedTextField extends StatelessWidget {
             ontap();
           },
           decoration: InputDecoration(
+              contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
               prefixIcon: fieldIcon,
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(50),

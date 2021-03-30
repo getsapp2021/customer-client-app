@@ -7,6 +7,7 @@ class GRoundedButton extends StatelessWidget {
   final Color textColor;
   final Icon icon;
   final String text;
+  final TextStyle textStyle;
   final Function onPressed;
   const GRoundedButton(
       {Key key,
@@ -15,6 +16,7 @@ class GRoundedButton extends StatelessWidget {
       this.text,
       this.borderColor,
       this.textColor,
+      this.textStyle,
       @required this.onPressed})
       : super(key: key);
   @override

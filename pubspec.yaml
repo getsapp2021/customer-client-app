@@ -38,6 +38,10 @@ dependencies:
 
   # Location Services
   geolocator: ^5.3.0
+  geocoder: ^0.2.1
+
+  # Map
+  google_maps_flutter: ^1.0.3
 
   # Network
   http: ^0.12.2
