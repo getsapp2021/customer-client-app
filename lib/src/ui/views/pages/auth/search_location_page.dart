@@ -55,7 +55,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
                     Icons.search,
                   ),
                   hintText: "Search for location",
-                ).py8().px16(),
+                ),
               ),
             ]),
           ),
