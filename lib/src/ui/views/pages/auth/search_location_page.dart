@@ -5,7 +5,6 @@ import 'package:customer/src/ui/views/widgets/g_rounded_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:customer/src/app/router.gr.dart';
 
 class SearchLocationPage extends StatefulWidget {
   @override
@@ -112,8 +111,8 @@ class AddressSearch extends SearchDelegate {
             : ListView.builder(
                 itemBuilder: (context, index) => ListTile(
                   title: Text(snapshot.data[index].description),
-                  onTap: () => viewModel.navigateToResultPage(snapshot.data[index].placeId)
-                  ,
+                  onTap: () => viewModel
+                      .navigateToResultPage(snapshot.data[index].placeId),
                 ),
                 itemCount: snapshot.data.length,
               );

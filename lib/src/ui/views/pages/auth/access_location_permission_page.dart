@@ -3,8 +3,8 @@ import 'package:customer/src/ui/views/pages/auth/access_location_permission_view
 import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:velocity_x/velocity_x.dart';
 import 'package:customer/src/app/router.gr.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class AccessLocationPermissionPage extends StatefulWidget {
   @override
