@@ -4,7 +4,6 @@ import 'package:customer/src/ui/views/pages/auth/search_location_viewmodel.dart'
 import 'package:customer/src/ui/views/widgets/g_rounded_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class SearchLocationPage extends StatefulWidget {
   @override
@@ -34,7 +33,7 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
               Icons.keyboard_arrow_left,
               color: ThemeColors.white,
             ),
-            title: "Search Location".text.color(ThemeColors.white).make(),
+            title: Text("Search Location"),
             backgroundColor: ThemeColors.primary,
             flexibleSpace: Flex(direction: Axis.horizontal, children: [
               Align(

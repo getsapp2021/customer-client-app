@@ -4,7 +4,6 @@ import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:customer/src/app/router.gr.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class AccessLocationPermissionPage extends StatefulWidget {
   @override
@@ -25,16 +24,15 @@ class _AccessLocationPermissionPageState
                 elevation: 0,
               ),
               body: Container(
-                width: context.mq.size.width,
-                height: context.mq.size.height,
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    "Location access \nis recommended".text.xl2.bold.make(),
+                    Text("Location access \nis recommended"),
                     SizedBox(height: 20),
-                    "It would allow us to serve you better and \nshow you stores and services closest to \nwhere you are."
-                        .text
-                        .make(),
+                    Text(
+                        "It would allow us to serve you better and \nshow you stores and services closest to \nwhere you are."),
                     Expanded(
                       child: Align(
                         alignment: Alignment.bottomCenter,
@@ -57,7 +55,7 @@ class _AccessLocationPermissionPageState
                     ),
                     SizedBox(height: 20),
                   ],
-                ).px32(),
+                ),
               ),
             ));
   }
