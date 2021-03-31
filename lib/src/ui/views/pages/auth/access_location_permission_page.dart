@@ -23,38 +23,46 @@ class _AccessLocationPermissionPageState
                 backgroundColor: ThemeColors.transparent,
                 elevation: 0,
               ),
-              body: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Location access \nis recommended"),
-                    SizedBox(height: 20),
-                    Text(
-                        "It would allow us to serve you better and \nshow you stores and services closest to \nwhere you are."),
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: GRoundedButton(
-                          onPressed: () => model.askPermission(),
-                          color: ThemeColors.primary,
-                          text: "Allow Access",
-                          textColor: ThemeColors.white,
+              body: Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 0),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Location access \nis recommended",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                        "It would allow us to serve you better and \nshow you stores and services closest to \nwhere you are.",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: GRoundedButton(
+                            onPressed: () => model.askPermission(),
+                            color: ThemeColors.primary,
+                            text: "Allow Access",
+                            textColor: ThemeColors.white,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 20),
-                    GRoundedButton(
-                      onPressed: () =>
-                          model.navigateTo(Routes.searchLocationPage),
-                      color: ThemeColors.white,
-                      borderColor: ThemeColors.black,
-                      text: "Enter Manually",
-                      textColor: ThemeColors.black,
-                    ),
-                    SizedBox(height: 20),
-                  ],
+                      SizedBox(height: 20),
+                      GRoundedButton(
+                        onPressed: () =>
+                            model.navigateTo(Routes.searchLocationPage),
+                        color: ThemeColors.white,
+                        borderColor: ThemeColors.black,
+                        text: "Enter Manually",
+                        textColor: ThemeColors.black,
+                      ),
+                      SizedBox(height: 20),
+                    ],
+                  ),
                 ),
               ),
             ));

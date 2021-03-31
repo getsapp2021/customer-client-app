@@ -10,6 +10,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoder/geocoder.dart';
 
+import '../ui/views/pages/auth/access_location_permission_page.dart';
 import '../ui/views/pages/auth/edit_profile_page.dart';
 import '../ui/views/pages/auth/otp_page.dart';
 import '../ui/views/pages/auth/search_location_page.dart';
@@ -24,6 +25,8 @@ class Routes {
   static const String signInPage = '/sign-in-page';
   static const String otpPage = '/otp-page';
   static const String editProfilePage = '/edit-profile-page';
+  static const String accessLocationPermissionPage =
+      '/access-location-permission-page';
   static const String searchLocationPage = '/search-location-page';
   static const String searchLocationResultDetailPage =
       '/search-location-result-detail-page';
@@ -33,6 +36,7 @@ class Routes {
     signInPage,
     otpPage,
     editProfilePage,
+    accessLocationPermissionPage,
     searchLocationPage,
     searchLocationResultDetailPage,
   };
@@ -47,6 +51,8 @@ class Router extends RouterBase {
     RouteDef(Routes.signInPage, page: SignInPage),
     RouteDef(Routes.otpPage, page: OtpPage),
     RouteDef(Routes.editProfilePage, page: EditProfilePage),
+    RouteDef(Routes.accessLocationPermissionPage,
+        page: AccessLocationPermissionPage),
     RouteDef(Routes.searchLocationPage, page: SearchLocationPage),
     RouteDef(Routes.searchLocationResultDetailPage,
         page: SearchLocationResultDetailPage),
@@ -87,6 +93,12 @@ class Router extends RouterBase {
     EditProfilePage: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => EditProfilePage(),
+        settings: data,
+      );
+    },
+    AccessLocationPermissionPage: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => AccessLocationPermissionPage(),
         settings: data,
       );
     },

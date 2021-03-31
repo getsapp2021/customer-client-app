@@ -33,31 +33,37 @@ class _SearchLocationPageState extends State<SearchLocationPage> {
               Icons.keyboard_arrow_left,
               color: ThemeColors.white,
             ),
-            title: Text("Search Location"),
+            title: Text(
+              "Search Location",
+              style: TextStyle(color: ThemeColors.white),
+            ),
             backgroundColor: ThemeColors.primary,
-            flexibleSpace: Flex(direction: Axis.horizontal, children: [
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: GRoundedTextField(
-                  controller: _searchController,
-                  ontap: () async {
-                    print("On Tapped");
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    await showSearch(
-                      context: context,
-                      // we haven't created AddressSearch class
-                      // this should be extending SearchDelegate
-                      delegate: AddressSearch(model),
-                    );
-                  },
-                  fillColor: ThemeColors.white,
-                  fieldIcon: Icon(
-                    Icons.search,
+            flexibleSpace: Padding(
+              padding: const EdgeInsets.fromLTRB(16.0, 10, 0, 10),
+              child: Flex(direction: Axis.horizontal, children: [
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: GRoundedTextField(
+                    controller: _searchController,
+                    ontap: () async {
+                      print("On Tapped");
+                      FocusScope.of(context).requestFocus(FocusNode());
+                      await showSearch(
+                        context: context,
+                        // we haven't created AddressSearch class
+                        // this should be extending SearchDelegate
+                        delegate: AddressSearch(model),
+                      );
+                    },
+                    fillColor: ThemeColors.white,
+                    fieldIcon: Icon(
+                      Icons.search,
+                    ),
+                    hintText: "Search for location",
                   ),
-                  hintText: "Search for location",
                 ),
-              ),
-            ]),
+              ]),
+            ),
           ),
         ),
       ),

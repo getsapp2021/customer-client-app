@@ -19,7 +19,7 @@ class GRoundedTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: 60,
-        width: 300,
+        width: 0.9 * MediaQuery.of(context).size.width,
         child: TextField(
           controller: controller,
           onTap: () {

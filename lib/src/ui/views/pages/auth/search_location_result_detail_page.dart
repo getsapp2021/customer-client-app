@@ -55,41 +55,59 @@ class SearchLocationResultDetailPage extends StatelessWidget {
                   ),
                   Flexible(
                     flex: 1,
-                    child: ListView(children: [
-                      Text("Location Information"),
-                      Text("Please enter details of your current \nlocation or click on the marker in the map"),
-                      SizedBox(height: 5),
-                      GRoundedTextField(
-                        controller: model.placeController,
-                        fieldIcon: Icon(Icons.location_on),
-                        hintText: "Place",
-                        fillColor: ThemeColors.white,
-                      ),
-                      SizedBox(height: 5),
-                      GRoundedTextField(
-                        controller: model.buildNoController,
-                        fieldIcon: Icon(Icons.location_city),
-                        fillColor: ThemeColors.white,
-                        hintText: "Building Number/House Number",
-                      ),
-                      SizedBox(height: 5),
-                      GRoundedTextField(
-                        controller: model.landmarkController,
-                        fieldIcon: Icon(Icons.location_searching_outlined),
-                        fillColor: ThemeColors.white,
-                        hintText: "Landmark",
-                      ),
-                      SizedBox(height: 15),
-                      GRoundedButton(
-                        onPressed: () => model.navigateTo(Routes.homePage),
-                        text: "Save",
-                        textStyle: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                        textColor: ThemeColors.white,
-                        color: ThemeColors.primary,
-                      ),
-                      SizedBox(height: 10),
-                    ]),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 1, 8, 0),
+                      child: ListView(children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 0),
+                          child: Text(
+                            "Location Information",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 0),
+                          child: Text(
+                            "Please enter details of your current \nlocation or click on the marker in the map",
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        GRoundedTextField(
+                          controller: model.placeController,
+                          fieldIcon: Icon(Icons.location_on),
+                          hintText: "Place",
+                          fillColor: ThemeColors.white,
+                        ),
+                        SizedBox(height: 2),
+                        GRoundedTextField(
+                          controller: model.buildNoController,
+                          fieldIcon: Icon(Icons.location_city),
+                          fillColor: ThemeColors.white,
+                          hintText: "Building Number/House Number",
+                        ),
+                        SizedBox(height: 2),
+                        GRoundedTextField(
+                          controller: model.landmarkController,
+                          fieldIcon: Icon(Icons.location_searching_outlined),
+                          fillColor: ThemeColors.white,
+                          hintText: "Landmark",
+                        ),
+                        SizedBox(height: 2),
+                        GRoundedButton(
+                          onPressed: () => model.navigateTo(Routes.homePage),
+                          text: "Save",
+                          textStyle: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18),
+                          textColor: ThemeColors.white,
+                          color: ThemeColors.primary,
+                        ),
+                        SizedBox(height: 10),
+                      ]),
+                    ),
                   ),
                 ],
               ),
