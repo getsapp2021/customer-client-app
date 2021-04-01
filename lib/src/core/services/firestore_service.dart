@@ -27,7 +27,7 @@ class FirestoreService extends BaseService {
     });
   }
 
-  Future<T> getDocumnet<T>(
+  Future<T> getDocument<T>(
       String path, T builder(DocumentSnapshot snapshot)) async {
     return _tryFutureOrThrowFailure<T>(() async {
       final docRef = _firebaseFireStore.doc(path);

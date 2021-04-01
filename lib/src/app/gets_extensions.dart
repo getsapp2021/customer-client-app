@@ -5,5 +5,5 @@ export 'package:customer/src/core/utils/extensions/string_extension.dart';
 export 'package:customer/src/core/utils/extensions/base_viewmodel_extension.dart';
 
 // UI extensions
-
 export 'package:customer/src/ui/utils/extensions/build_context_extension.dart';
+export 'package:customer/src/ui/utils/extensions/navigation_service_extension.dart';

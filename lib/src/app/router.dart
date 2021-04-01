@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route_annotations.dart';
 import 'package:customer/src/ui/views/pages/auth/access_location_permission_page.dart';
-import 'package:customer/src/ui/views/pages/auth/edit_profile_page.dart';
 import 'package:customer/src/ui/views/pages/auth/signin_page.dart';
 import 'package:customer/src/ui/views/pages/home/home_page.dart';
+import 'package:customer/src/ui/views/pages/profile/edit_profile_page.dart';
 import 'package:customer/src/ui/views/pages/startup/startup_page.dart';
 import 'package:customer/src/ui/views/pages/auth/otp_page.dart';
 import 'package:customer/src/ui/views/pages/auth/search_location_page.dart';

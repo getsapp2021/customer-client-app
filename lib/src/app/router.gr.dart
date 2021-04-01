@@ -10,13 +10,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoder/geocoder.dart';
 
+import '../core/models/phone_number.dart';
 import '../ui/views/pages/auth/access_location_permission_page.dart';
-import '../ui/views/pages/auth/edit_profile_page.dart';
 import '../ui/views/pages/auth/otp_page.dart';
 import '../ui/views/pages/auth/search_location_page.dart';
 import '../ui/views/pages/auth/search_location_result_detail_page.dart';
 import '../ui/views/pages/auth/signin_page.dart';
 import '../ui/views/pages/home/home_page.dart';
+import '../ui/views/pages/profile/edit_profile_page.dart';
 import '../ui/views/pages/startup/startup_page.dart';
 
 class Routes {
@@ -83,10 +84,7 @@ class Router extends RouterBase {
         orElse: () => OtpPageArguments(),
       );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => OtpPage(
-          countryCode: args.countryCode,
-          phoneNumber: args.phoneNumber,
-        ),
+        builder: (context) => OtpPage(phoneNumber: args.phoneNumber),
         settings: data,
       );
     },
@@ -126,9 +124,8 @@ class Router extends RouterBase {
 
 /// OtpPage arguments holder class
 class OtpPageArguments {
-  final String countryCode;
-  final String phoneNumber;
-  OtpPageArguments({this.countryCode, this.phoneNumber});
+  final PhoneNumber phoneNumber;
+  OtpPageArguments({this.phoneNumber});
 }
 
 /// SearchLocationResultDetailPage arguments holder class

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class GRoundedButton extends StatelessWidget {
   final Color color;
   final Color borderColor;
-  final Color textColor;
   final Icon icon;
   final String text;
   final TextStyle textStyle;
@@ -15,8 +14,7 @@ class GRoundedButton extends StatelessWidget {
       this.icon,
       this.text,
       this.borderColor,
-      this.textColor,
-      this.textStyle,
+      this.textStyle = const TextStyle(color: ThemeColors.white, fontWeight: FontWeight.w600),
       @required this.onPressed})
       : super(key: key);
   @override
@@ -36,8 +34,7 @@ class GRoundedButton extends StatelessWidget {
           child: icon == null
               ? Text(
                   "$text",
-                  style:
-                      TextStyle(color: textColor, fontWeight: FontWeight.bold),
+                  style: textStyle,
                 )
               : icon,
         ),

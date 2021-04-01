@@ -4,22 +4,23 @@ import 'package:customer/src/ui/utils/colors.dart';
 class ProfileTextField extends StatelessWidget {
   final Icon icon;
   final String hintText;
-  final TextEditingController textEditingController;
+  final TextEditingController controller;
+  final bool enabled;
+  final String Function(String) validator;
 
-  const ProfileTextField(
-      {Key key, this.icon, this.hintText, this.textEditingController})
-      : super(key: key);
+  const ProfileTextField({
+    this.icon,
+    this.hintText,
+    this.controller,
+    this.enabled = true,
+    this.validator,
+  });
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-
     return Container(
-      height: height*0.065,
-      padding: EdgeInsets.symmetric(horizontal: width / 20.0),
       margin: EdgeInsets.symmetric(vertical: 10.0),
-      decoration: BoxDecoration(
+      decoration:  BoxDecoration(
         boxShadow: [
           BoxShadow(
             color: Color.fromRGBO(0, 0, 0, 0.06),
@@ -27,23 +28,32 @@ class ProfileTextField extends StatelessWidget {
             offset: Offset(2, 3),
           ),
         ],
-        color: ThemeColors.white,
+        // color: ThemeColors.white,
         borderRadius: BorderRadius.circular(50),
       ),
       child: TextFormField(
-        controller: textEditingController,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        enabled: enabled,
+        validator: validator,
+        controller: controller,
+        readOnly: !enabled,
         decoration: InputDecoration(
-          // contentPadding: EdgeInsets.only(top: 0),
+          contentPadding: EdgeInsets.all(16),
           hintText: hintText,
-          enabledBorder: const OutlineInputBorder(
+          filled: true,
+          fillColor: Colors.white,
+          enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(50)),
-            borderSide: const BorderSide(
-              color: ThemeColors.white,
-            ),
+            borderSide: BorderSide(color: ThemeColors.white),
+          ),
+
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(50)),
+            borderSide: const BorderSide(color: ThemeColors.white),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(50.0)),
-            borderSide: BorderSide(color: ThemeColors.white),
+            borderRadius: BorderRadius.all(Radius.circular(50)),
+            borderSide: BorderSide(color: ThemeColors.primary),
           ),
         ),
       ),

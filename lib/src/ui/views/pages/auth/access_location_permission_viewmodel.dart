@@ -7,11 +7,21 @@ class AccessLocationPermissionViewModel extends BaseViewModel {
   NavigationService _navigationService = locator<NavigationService>();
   PermissionService _permissionService = locator<PermissionService>();
 
+  void initialise() async {
+    await _permissionService.isAllRequiredLocationPermissionsGranted;
+    print("directly redirecting");
+  }
+
   void navigateTo(String routeName) {
     _navigationService.navigateTo(routeName);
   }
 
-  void askPermission() {
-    _permissionService.checkLocationPermission();
+  void askLocationPermission() async {
+    final bool isAllRequiredLocationPermissionsGranted =  await _permissionService.askForLocationPermission();
+    if(isAllRequiredLocationPermissionsGranted){
+      print("askLocationPermission: on All location permission Granted");
+    }else{
+      print("askLocationPermission: on All location permission NOT Granted");
+    }
   }
 }

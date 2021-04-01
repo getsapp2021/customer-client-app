@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 
 class PhoneNumber {
-  String countryISOCode;
-  String countryCode;
-  String number;
+  final String countryISOCode;
+  final String countryCode;
+  final String number;
 
   PhoneNumber({
     @required this.countryISOCode,
@@ -13,5 +13,27 @@ class PhoneNumber {
 
   String get completeNumber {
     return countryCode + number;
+  }
+
+  factory PhoneNumber.fromMap(Map<String, dynamic> map) {
+    if (map == null) return null;
+    return PhoneNumber(
+      countryCode: map['countryCode'] as String,
+      number: map['number'] as String,
+      countryISOCode: map['countryISOCode'] as String,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'countryCode': this.countryCode,
+      'number': this.number,
+      'countryISOCode': this.countryISOCode
+    };
+  }
+
+  @override
+  String toString() {
+    return 'PhoneNumber{countryISOCode: $countryISOCode, countryCode: $countryCode, number: $number}';
   }
 }

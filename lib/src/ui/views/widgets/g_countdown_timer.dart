@@ -50,6 +50,7 @@ class _GCountDownTimerState extends State<GCountDownTimer>
 
   @override
   void initState() {
+    print("Print init state");
     super.initState();
     duration = new Duration(seconds: widget.secondsRemaining);
     _controller = new AnimationController(
@@ -60,6 +61,7 @@ class _GCountDownTimerState extends State<GCountDownTimer>
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed ||
           status == AnimationStatus.dismissed) {
+        print("Animation State: $status");
         widget.whenTimeExpires();
       }
     });
@@ -78,10 +80,11 @@ class _GCountDownTimerState extends State<GCountDownTimer>
         );
         _controller.reverse(from: widget.secondsRemaining.toDouble());
         _controller.addStatusListener((status) {
-          if (status == AnimationStatus.completed) {
+          print("Animation State from did: $status");
+
+          if (status == AnimationStatus.completed ||
+              status == AnimationStatus.dismissed) {
             widget.whenTimeExpires();
-          } else if (status == AnimationStatus.dismissed) {
-            print("Animation Complete");
           }
         });
       });

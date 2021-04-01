@@ -11,6 +11,7 @@ class ThemeColors {
 
   static const Color white = Color(0xffffffff);
   static const Color gray = Color(0xff676767);
+  static const Color grey = Color(0xff707070);
   static const Color black = Colors.black;
   static const Color transparent = Colors.transparent;
 }

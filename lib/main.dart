@@ -1,5 +1,6 @@
 import 'package:customer/src/app/router.gr.dart';
 import 'package:customer/src/ui/utils/themes.dart';
+import 'package:customer/src/ui/views/pages/auth/access_location_permission_page.dart';
 import 'package:flutter/material.dart' hide Router;
 import 'package:flutter/services.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: MyTheme.lightTheme(context),
-      initialRoute: Routes.accessLocationPermissionPage,
+      // home: AccessLocationPermissionPage(),
+      initialRoute: Routes.startupPage,
       onGenerateRoute: Router().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,
     );

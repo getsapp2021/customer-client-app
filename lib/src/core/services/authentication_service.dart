@@ -1,4 +1,5 @@
 import 'package:customer/src/core/errors/failure.dart';
+import 'package:customer/src/core/models/phone_number.dart';
 import 'package:customer/src/core/models/user_profile.dart';
 import 'package:customer/src/core/services/user_profile_service.dart';
 import 'package:customer/src/core/utils/enums/auth_status.dart';
@@ -89,13 +90,21 @@ class AuthenticationService extends AuthenticationServiceBase {
   @override
   Future<bool> verifyOtp(String smsOtp) async {
     print("Manually Verifying Phone number: $_verificationId, $smsOtp");
+    try{
+      this._phoneAuthCredential = PhoneAuthProvider.credential(
+        verificationId: this._verificationId,
+        smsCode: smsOtp,
+      );
+      await _login();
+      return _isFirstTimeUser();
 
-    this._phoneAuthCredential = PhoneAuthProvider.credential(
-      verificationId: this._verificationId,
-      smsCode: smsOtp,
-    );
-    await _login();
-    return _isFirstTimeUser();
+    } on Failure{
+      rethrow;
+    }
+    catch(e){
+      throw Failure(message: "Something went wrong, Please try again or report us!");
+    }
+
   }
 
   Future<bool> _isFirstTimeUser() async {
@@ -115,11 +124,14 @@ class AuthenticationService extends AuthenticationServiceBase {
     }
   }
 
-  Future<void> registerCurrentUser() {
+  Future<void> registerCurrentUser(PhoneNumber phoneNumber) {
     User user = _firebaseAuth.currentUser;
+    if (user.phoneNumber != phoneNumber.completeNumber){
+      throw Failure(message: "Authorization Failed. Provided phone number does not match with current user's phone number.");
+    }
     if (user == null) throw Failure(message: "User is not logged in.");
     UserProfile userProfile = UserProfile(
-      phone: user.phoneNumber,
+      phoneNumber: phoneNumber,
       uid: user.uid,
     );
     return _userProfileService.createUserProfile(userProfile);

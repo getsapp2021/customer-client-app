@@ -314,7 +314,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
     return DecoratedBox(
       decoration: widget.dropdownDecoration,
       child: Container(
-        height: 65,
+        height: 55,
         width: 90,
         decoration: BoxDecoration(
           border: Border.all(color: ThemeColors.primary, width: 2),
@@ -354,7 +354,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
               ],
             ),
           ),
-          onTap: null,
+          onTap: _changeCountry,
         ),
       ),
     );

@@ -21,17 +21,17 @@ class UserProfileService {
       "${FireStoreCollections.userProfiles}/$uid";
 
   Future<UserProfile> getUserProfile(String uid) =>
-      _firestoreService.getDocumnet(
+      _firestoreService.getDocument(
         _getUserProfileDocumnetPath(uid),
         (snapshot) => UserProfile.fromSnapshot(snapshot),
       );
 
   Future<void> createUserProfile(UserProfile userProfile) =>
-      _firestoreService.updateData(
+      _firestoreService.setData(
           _getUserProfileDocumnetPath(userProfile.uid), userProfile.toMap());
 
   Future<void> updateUserProfile(UserProfile userProfile) {
-    return _firestoreService.setData(
+    return _firestoreService.updateData(
         _getUserProfileDocumnetPath(userProfile.uid), userProfile.toMap());
   }
 

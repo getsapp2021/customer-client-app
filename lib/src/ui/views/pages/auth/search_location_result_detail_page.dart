@@ -10,6 +10,7 @@ import 'package:customer/src/ui/views/widgets/g_rounded_textfield.dart';
 
 class SearchLocationResultDetailPage extends StatelessWidget {
   final Coordinates coordinate;
+
   SearchLocationResultDetailPage({@required this.coordinate});
 
   @override
@@ -101,8 +102,10 @@ class SearchLocationResultDetailPage extends StatelessWidget {
                           onPressed: () => model.navigateTo(Routes.homePage),
                           text: "Save",
                           textStyle: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                          textColor: ThemeColors.white,
+                            color: ThemeColors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
                           color: ThemeColors.primary,
                         ),
                         SizedBox(height: 10),

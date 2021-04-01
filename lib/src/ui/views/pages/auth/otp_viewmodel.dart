@@ -1,62 +1,69 @@
 import 'package:customer/src/app/locator.dart';
+import 'package:customer/src/core/models/phone_number.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:customer/src/core/services/authentication_service.dart';
 import 'package:customer/src/app/router.gr.dart';
-import 'package:customer/src/core/utils/extensions/base_viewmodel_extension.dart';
+import 'package:customer/src/app/gets_extensions.dart';
 
 class OtpViewModel extends BaseViewModel {
-  String _otpText = "";
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final NavigationService _navigationService = locator<NavigationService>();
+  final AuthenticationService _authenticationService =
+  locator<AuthenticationService>();
 
-  GlobalKey<FormState> get formKey => _formKey;
-  set otpText(String value) => _otpText = value;
-  bool enableResendOtpButton = false;
-  int secondsToWait = 30;
+  bool _enableResendOtpButton;
+  bool get enableResendOtpButton => _enableResendOtpButton;
 
-  NavigationService _navigationService = locator<NavigationService>();
-  void navigateTo(String routeName) {
-    _navigationService.navigateTo(routeName);
+  int _secondsToWait;
+  int get secondsToWait => _secondsToWait;
+
+  String _smsOtp;
+  set smsOtp(String value) => _smsOtp = value;
+
+  final GlobalKey<FormState> otpFormKey = GlobalKey<FormState>();
+  final TextEditingController otpTextEditingController = TextEditingController();
+
+  PhoneNumber phoneNumber;
+
+  void initialise(PhoneNumber phoneNumber){
+    _enableResendOtpButton = false;
+    _secondsToWait = 60;
+    this.phoneNumber = phoneNumber;
   }
 
-  void resetTimer() {
-    secondsToWait += 30;
-    enableResendOtpButton = false;
+  void _resetTimer() {
+    _secondsToWait += 30;
+    _enableResendOtpButton = false;
     notifyListeners();
   }
 
   void timeExpired() {
-    enableResendOtpButton = true;
+    _enableResendOtpButton = true;
     notifyListeners();
   }
 
-  String _smsOtp;
-
-  set smsOtp(String value) => _smsOtp = value;
-
-  AuthenticationService _authenticationService =
-      locator<AuthenticationService>();
-
-  GlobalKey<FormState> _otpFormKey = GlobalKey<FormState>();
-  GlobalKey<FormState> get otpFormKey => _otpFormKey;
 
   void performVerifyOtp() => performTryOrFailure(() async {
-        if (!_otpFormKey.currentState.validate()) return;
+        if (!otpFormKey.currentState.validate()) return;
 
-        _otpFormKey.currentState.save();
+        otpFormKey.currentState.save();
         setBusy(true);
         bool isFirstTimeUser = await _authenticationService.verifyOtp(_smsOtp);
-        setBusy(false);
+
         if (isFirstTimeUser) {
-          await _authenticationService.registerCurrentUser();
-          _navigationService.navigateTo(Routes.editProfilePage);
+          await _authenticationService.registerCurrentUser(phoneNumber);
+          setBusy(false);
+          return _navigationService.replaceWith(Routes.editProfilePage);
         }
-        _navigationService.navigateTo(Routes.homePage);
+        setBusy(false);
+        _navigationService.navigateToStartupPage();
       });
 
-  void resendOtp() {
-    // TODO:
-    throw UnimplementedError();
+  void resendOtp(PhoneNumber phoneNumber) {
+    print("Resending the OTP...");
+    otpTextEditingController.clear();
+    _authenticationService.sendOtp(phoneNumber.completeNumber);
+    _resetTimer();
   }
 }

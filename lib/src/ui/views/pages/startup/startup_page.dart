@@ -11,8 +11,7 @@ class StartupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<StartupViewModel>.reactive(
       viewModelBuilder: () => StartupViewModel(),
-      // onModelReady: (model) => model.initialize(),
-      builder: (context, model, child) => model.dataReady
+      builder: (context, model, child) => !model.showSplashScreen && model.dataReady
           ? model.data == AuthStatus.loggedOut
               ? SignInPage()
               : HomePage()

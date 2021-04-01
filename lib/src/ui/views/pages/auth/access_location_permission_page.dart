@@ -1,9 +1,9 @@
 import 'package:customer/src/ui/utils/colors.dart';
 import 'package:customer/src/ui/views/pages/auth/access_location_permission_viewmodel.dart';
-import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:customer/src/app/router.gr.dart';
+import 'package:customer/src/ui/views/widgets/gets_common_widgets.dart';
 
 class AccessLocationPermissionPage extends StatefulWidget {
   @override
@@ -16,24 +16,27 @@ class _AccessLocationPermissionPageState
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<AccessLocationPermissionViewModel>.nonReactive(
-        viewModelBuilder: () => AccessLocationPermissionViewModel(),
-        builder: (context, model, child) => Scaffold(
-              appBar: AppBar(
-                leading: Icon(Icons.keyboard_arrow_left),
-                backgroundColor: ThemeColors.transparent,
-                elevation: 0,
+      viewModelBuilder: () => AccessLocationPermissionViewModel(),
+      builder: (context, model, child) => Scaffold(
+        body: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 50),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: GBackButton(),
               ),
-              body: Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 0),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
+              SizedBox(height: 20),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "Location access \nis recommended",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 20),
                       Text(
@@ -44,10 +47,9 @@ class _AccessLocationPermissionPageState
                         child: Align(
                           alignment: Alignment.bottomCenter,
                           child: GRoundedButton(
-                            onPressed: () => model.askPermission(),
+                            onPressed: model.askLocationPermission,
                             color: ThemeColors.primary,
                             text: "Allow Access",
-                            textColor: ThemeColors.white,
                           ),
                         ),
                       ),
@@ -56,15 +58,20 @@ class _AccessLocationPermissionPageState
                         onPressed: () =>
                             model.navigateTo(Routes.searchLocationPage),
                         color: ThemeColors.white,
-                        borderColor: ThemeColors.black,
+                        borderColor: ThemeColors.grey,
                         text: "Enter Manually",
-                        textColor: ThemeColors.black,
+                        textStyle: TextStyle(
+                            color: ThemeColors.grey, fontWeight: FontWeight.w600),
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 40),
                     ],
                   ),
                 ),
               ),
-            ));
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -15,23 +15,18 @@ class SigninViewModel extends BaseViewModel {
   AuthenticationService _authenticationService =
       locator<AuthenticationService>();
 
-  GlobalKey<FormState> _phoneNumberFormKey = GlobalKey<FormState>();
-  GlobalKey<FormState> get phoneNumberFormKey => _phoneNumberFormKey;
+  final GlobalKey<FormState> phoneNumberFormKey = GlobalKey<FormState>();
 
   void performSendOtp() => performTryOrFailure(() async {
         if (!phoneNumberFormKey.currentState.validate()) return;
 
         phoneNumberFormKey.currentState.save();
-
         setBusy(true);
         await _authenticationService.sendOtp(phoneNumber.completeNumber);
         setBusy(false);
         _navigationService.navigateTo(
           Routes.otpPage,
-          arguments: OtpPageArguments(
-            countryCode: phoneNumber.countryCode,
-            phoneNumber: phoneNumber.number,
-          ),
+          arguments: OtpPageArguments(phoneNumber: phoneNumber),
         );
       });
 }
