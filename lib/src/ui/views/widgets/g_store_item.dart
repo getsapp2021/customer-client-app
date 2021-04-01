@@ -20,9 +20,7 @@ class GStoreItem extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
                 color: ThemeColors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20))),
+                borderRadius: BorderRadius.circular(20)),
             child: Column(
               children: [
                 Padding(

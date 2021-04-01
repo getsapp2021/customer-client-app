@@ -6,6 +6,7 @@ import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
 import 'package:customer/src/ui/views/widgets/g_rounded_textfield.dart';
 import 'package:customer/src/ui/views/widgets/g_store_category_item.dart';
 import 'package:customer/src/ui/views/widgets/g_store_item.dart';
+import 'package:customer/src/ui/views/widgets/service_item.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -166,7 +167,74 @@ class HomePage extends StatelessWidget {
                         )),
                       ),
                     ),
-                    SizedBox(height: 30)
+                    SizedBox(height: 30),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Container(
+                        height: 30,
+                        child: Row(
+                          children: [
+                            Text(
+                              "Popular Services",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w500),
+                            ),
+                            Icon(Icons.keyboard_arrow_right)
+                          ],
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Container(
+                            child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              ServiceItem(),
+                              SizedBox(width: 30),
+                              ServiceItem(),
+                              SizedBox(width: 30),
+                              ServiceItem(),
+                              SizedBox(width: 30),
+                              ServiceItem(),
+                            ],
+                          ),
+                        )),
+                      ),
+                    ),
+                    SizedBox(height: 30),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Container(
+                        height: 30,
+                        child: Row(
+                          children: [
+                            Text(
+                              "Popular Restaurants",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w500),
+                            ),
+                            Icon(Icons.keyboard_arrow_right)
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: GStoreItem(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: GStoreItem(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: GStoreItem(),
+                    ),
                   ],
                 ),
               ),
