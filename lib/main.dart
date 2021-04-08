@@ -1,6 +1,9 @@
 import 'package:customer/src/app/router.gr.dart';
 import 'package:customer/src/ui/utils/themes.dart';
 import 'package:customer/src/ui/views/pages/auth/access_location_permission_page.dart';
+import 'package:customer/src/ui/views/pages/auth/otp_page.dart';
+import 'package:customer/src/ui/views/pages/auth/signin_page.dart';
+import 'package:customer/src/ui/views/pages/profile/edit_profile_page.dart';
 import 'package:flutter/material.dart' hide Router;
 import 'package:flutter/services.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -31,6 +34,7 @@ class MyApp extends StatelessWidget {
       initialRoute: Routes.startupPage,
       onGenerateRoute: Router().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,
+
     );
   }
 }

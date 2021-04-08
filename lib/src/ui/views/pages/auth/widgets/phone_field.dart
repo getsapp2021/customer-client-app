@@ -318,7 +318,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
         width: 90,
         decoration: BoxDecoration(
           border: Border.all(color: ThemeColors.primary, width: 2),
-          borderRadius: BorderRadius.all(Radius.circular(50)),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         child: InkWell(
           borderRadius: widget.dropdownDecoration.borderRadius,

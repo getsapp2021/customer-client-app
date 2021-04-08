@@ -4,6 +4,7 @@ import 'package:customer/src/ui/views/pages/auth/signin_viewmodel.dart';
 import 'package:flutter/gestures.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter/material.dart';
+import '../../../utils/colors.dart';
 import 'widgets/phone_field.dart';
 import 'package:customer/src/ui/views/widgets/gets_common_widgets.dart';
 
@@ -20,24 +21,26 @@ class SignInPage extends StatelessWidget {
         body: SafeArea(
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(
-                horizontal: width * 0.07, vertical: height * 0.1),
-            physics: BouncingScrollPhysics(),
+                horizontal: 20, vertical:60),
+            physics: NeverScrollableScrollPhysics(),
             child: Column(
               children: [
                 Image.asset(
-                  "assets/images/auth/sign_in_logo.png",
-                  width: width * 0.5,
+                  "assets/images/auth/sign_in_clipart.png",
+                  width: 250,
                   // alignment: Alignment.center,
                 ),
-                SizedBox(height: height * 0.07),
+                SizedBox(height: 40),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "Hey There!",
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      fontSize: width * 0.060,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
+                      color: ThemeColors.fontColor,
+
                     ),
                   ),
                 ),
@@ -46,11 +49,12 @@ class SignInPage extends StatelessWidget {
                   child: Text(
                     "Login with your mobile number",
                     style: TextStyle(
-                      fontSize: width * 0.045,
+                      fontSize: 17,
+                      color: ThemeColors.fontColor,
                     ),
                   ),
                 ),
-                SizedBox(height: height * 0.065),
+                SizedBox(height: 45),
                 Form(
                   key: model.phoneNumberFormKey,
                   child: IntlPhoneField(
@@ -60,12 +64,12 @@ class SignInPage extends StatelessWidget {
                       hintText: "9999999999",
                       contentPadding: EdgeInsets.all(15),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         borderSide:
                             BorderSide(color: ThemeColors.primary, width: 2),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         borderSide: BorderSide(
                           color: ThemeColors.primary,
                           width: 2,
@@ -76,13 +80,13 @@ class SignInPage extends StatelessWidget {
                     onSaved: (value) => model.phoneNumber = value,
                   ),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 45),
                 model.isBusy ? GCircularProgressIndicator() : GRoundedButton(
                   onPressed: () => model.performSendOtp(),
                   color: ThemeColors.primary,
-                  text: "Send OTP",
+                  text: "Sign In",
                 ),
-                SizedBox(height: 60),
+                SizedBox(height: 45),
                 Text(
                   "by signing in you agree to our ",
                   textAlign: TextAlign.center,
@@ -97,7 +101,7 @@ class SignInPage extends StatelessWidget {
                       fontSize: width * 0.04,
                       decoration: TextDecoration.underline,
                       color: ThemeColors.primary,
-                      fontWeight: FontWeight.w500,
+
                     ),
                     children: [
                       TextSpan(
@@ -118,6 +122,14 @@ class SignInPage extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+                SizedBox(
+                  height: 55,
+                ),
+                Image.asset(
+                  "assets/images/auth/gets.png",
+                  width: 200,
+                  // alignment: Alignment.center,
                 ),
               ],
             ),

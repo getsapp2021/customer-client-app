@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:customer/src/ui/utils/colors.dart';
 
+import '../../../../utils/colors.dart';
+
 class ProfileTextField extends StatelessWidget {
   final Icon icon;
   final String hintText;
   final TextEditingController controller;
   final bool enabled;
   final String Function(String) validator;
+  final Color textColor;
 
   const ProfileTextField({
     this.icon,
@@ -14,6 +17,7 @@ class ProfileTextField extends StatelessWidget {
     this.controller,
     this.enabled = true,
     this.validator,
+    this.textColor,
   });
 
   @override
@@ -35,6 +39,9 @@ class ProfileTextField extends StatelessWidget {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         enabled: enabled,
         validator: validator,
+        style: TextStyle(
+          color: textColor,
+        ),
         controller: controller,
         readOnly: !enabled,
         decoration: InputDecoration(

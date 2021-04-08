@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-
+import 'dart:async';
 import 'package:customer/src/core/models/phone_number.dart';
 import 'package:customer/src/ui/utils/colors.dart';
 import 'package:customer/src/ui/views/widgets/g_circular_progress_indicator.dart';
@@ -40,6 +40,7 @@ class OtpPage extends StatelessWidget {
                 "Please enter the otp sent to:",
                 style: TextStyle(
                   fontSize: width * 0.038,
+                  color: ThemeColors.fontColor,
                 ),
               ),
               Text(
@@ -47,6 +48,7 @@ class OtpPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: width * 0.045,
                   fontWeight: FontWeight.bold,
+                  color: ThemeColors.fontColor,
                 ),
               ),
               Form(
@@ -57,12 +59,13 @@ class OtpPage extends StatelessWidget {
                   cursorWidth: 3,
                   controller: model.otpTextEditingController,
                   style: TextStyle(
-                    color: ThemeColors.gray,
+                    color: ThemeColors.fontColor,
                     fontSize: width * 0.12,
                     fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.justify,
                   maxLength: 6,
+
                   decoration: InputDecoration(
                     hintText: "000000",
                     counterText: "",
@@ -80,6 +83,7 @@ class OtpPage extends StatelessWidget {
                     "Haven’t receive it yet?",
                     style: TextStyle(
                       fontSize: width * 0.045,
+                      color: ThemeColors.fontColor,
                     ),
                   ),
                   SizedBox(
@@ -91,7 +95,7 @@ class OtpPage extends StatelessWidget {
                       "Resend OTP",
                       style: TextStyle(
                         color: !model.enableResendOtpButton
-                            ? ThemeColors.gray
+                            ? ThemeColors.fontColor
                             : ThemeColors.primary,
                         fontSize: width * 0.045,
                       ),
@@ -108,6 +112,16 @@ class OtpPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: width * 0.038,
                       fontWeight: FontWeight.bold,
+                      color: ThemeColors.fontColor,
+                    ),
+                  ),
+                  GCountDownTimer(
+                    secondsRemaining: model.secondsToWait,
+                    whenTimeExpires: model.timeExpired,
+                    countDownTimerStyle:TextStyle(
+                      fontSize: width * 0.038,
+                      fontWeight: FontWeight.bold,
+                      color: ThemeColors.fontColor,
                     ),
                   ),
 

@@ -7,6 +7,8 @@ import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
 import 'package:stacked/stacked.dart';
 import 'package:customer/src/ui/views/pages/profile/edit_profile_viewmodel.dart';
 
+import '../../../utils/colors.dart';
+
 class EditProfilePage extends StatefulWidget {
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
@@ -39,6 +41,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   style: TextStyle(
                     fontSize: width * 0.062,
                     fontWeight: FontWeight.bold,
+                    color: ThemeColors.fontColor,
                   ),
                 ),
                 SizedBox(height: 15),
@@ -46,6 +49,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   'Update your profile details',
                   style: TextStyle(
                     fontSize: width * 0.0425,
+                    color: ThemeColors.fontColor,
                   ),
                 ),
                 SizedBox(height: 25),
@@ -66,6 +70,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         validator: AuthValidator.emailValidator,
                       ),
                       ProfileTextField(
+                        textColor: ThemeColors.fontColor,
                         icon: Icon(Icons.phone_android_outlined),
                         controller: model.mobileController,
                         enabled: false,
@@ -79,31 +84,65 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ),
                 ),
                 SizedBox(height: 50),
-                model.isBusy ? GCircularProgressIndicator() : Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.max,
-                  // crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Flexible(
-                      flex: 7,
-                      child: GRoundedButton(
-                        onPressed: model.performEditProfile,
-                        color: ThemeColors.primary,
-                        text: "Save Profile",
-                      ),
-                    ),
-                    SizedBox(width: 20),
-                    Flexible(
-                      flex: 3,
-                      child: GRoundedButton(
-                        onPressed: () => () {},
-                        color: ThemeColors.primary,
-                        text: "Skip",
-                      ),
-                    ),
-                  ],
-                ),
+                // model.isBusy
+                //     ? GCircularProgressIndicator()
+                //     : Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         mainAxisSize: MainAxisSize.max,
+                //         // crossAxisAlignment: CrossAxisAlignment.end,
+                //         children: [
+                //           Flexible(
+                //             flex: 7,
+                //             child: GRoundedButton(
+                //               onPressed: model.performEditProfile,
+                //               color: ThemeColors.primary,
+                //               text: "Save Profile",
+                //             ),
+                //           ),
+                //           SizedBox(width: 20),
+                //           Flexible(
+                //             flex: 3,
+                //             child: GRoundedButton(
+                //               onPressed: () => () {},
+                //               color: ThemeColors.primary,
+                //               text: "Skip",
+                //             ),
+                //           ),
+                //         ],
+                //       ),
               ],
+            ),
+          ),
+          bottomNavigationBar: model.isBusy
+              ? GCircularProgressIndicator() : BottomAppBar(
+            elevation: 10,
+            child: Container(
+              margin: EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+
+                // crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Flexible(
+                    flex: 7,
+                    child: GRoundedButton(
+                      onPressed: model.performEditProfile,
+                      color: ThemeColors.primary,
+                      text: "Save Profile",
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  Flexible(
+                    flex: 3,
+                    child: GRoundedButton(
+                      onPressed: () => () {},
+                      color: ThemeColors.primary,
+                      text: "Skip",
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );

@@ -27,7 +27,7 @@ class GRoundedButton extends StatelessWidget {
         height: height * 0.065,
         decoration: BoxDecoration(
             color: color,
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.circular(10),
             border:
                 Border.all(color: borderColor != null ? borderColor : color)),
         child: Center(
