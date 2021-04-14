@@ -20,6 +20,7 @@ void setupLocator() {
   // Third Party Services
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
+  locator.registerLazySingleton(() => BottomSheetService());
 
   locator.registerLazySingleton(() => Logger(printer: GLogPrinter()));
 }

@@ -99,10 +99,8 @@ class SearchLocationResultDetailPage extends StatelessWidget {
                         SizedBox(height: 2),
                         GRoundedButton(
                           onPressed: () => model.navigateTo(Routes.homePage),
-                          text: "Save",
-                          textStyle: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 18),
-                          textColor: ThemeColors.white,
+                          child: Text("Save", style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 18, color: ThemeColors.white),),
                           color: ThemeColors.primary,
                         ),
                         SizedBox(height: 10),

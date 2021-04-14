@@ -17,7 +17,11 @@ import '../ui/views/pages/auth/search_location_page.dart';
 import '../ui/views/pages/auth/search_location_result_detail_page.dart';
 import '../ui/views/pages/auth/signin_page.dart';
 import '../ui/views/pages/home/home_page.dart';
+import '../ui/views/pages/services/services_checkout_page.dart';
+import '../ui/views/pages/services/services_details_page.dart';
 import '../ui/views/pages/startup/startup_page.dart';
+import '../ui/views/pages/store/store_details_page.dart';
+import '../ui/views/pages/store/store_home_page.dart';
 
 class Routes {
   static const String startupPage = '/startup-page';
@@ -30,6 +34,10 @@ class Routes {
   static const String searchLocationPage = '/search-location-page';
   static const String searchLocationResultDetailPage =
       '/search-location-result-detail-page';
+  static const String storeHomePage = '/store-home-page';
+  static const String storeDetailsPage = '/store-details-page';
+  static const String servicesDetailsPage = '/services-details-page';
+  static const String servicesCheckoutPage = '/services-checkout-page';
   static const all = <String>{
     startupPage,
     homePage,
@@ -39,6 +47,10 @@ class Routes {
     accessLocationPermissionPage,
     searchLocationPage,
     searchLocationResultDetailPage,
+    storeHomePage,
+    storeDetailsPage,
+    servicesDetailsPage,
+    servicesCheckoutPage,
   };
 }
 
@@ -56,6 +68,10 @@ class Router extends RouterBase {
     RouteDef(Routes.searchLocationPage, page: SearchLocationPage),
     RouteDef(Routes.searchLocationResultDetailPage,
         page: SearchLocationResultDetailPage),
+    RouteDef(Routes.storeHomePage, page: StoreHomePage),
+    RouteDef(Routes.storeDetailsPage, page: StoreDetailsPage),
+    RouteDef(Routes.servicesDetailsPage, page: ServicesDetailsPage),
+    RouteDef(Routes.servicesCheckoutPage, page: ServicesCheckoutPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -114,6 +130,30 @@ class Router extends RouterBase {
       return MaterialPageRoute<dynamic>(
         builder: (context) =>
             SearchLocationResultDetailPage(coordinate: args.coordinate),
+        settings: data,
+      );
+    },
+    StoreHomePage: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => StoreHomePage(),
+        settings: data,
+      );
+    },
+    StoreDetailsPage: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => StoreDetailsPage(),
+        settings: data,
+      );
+    },
+    ServicesDetailsPage: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => ServicesDetailsPage(),
+        settings: data,
+      );
+    },
+    ServicesCheckoutPage: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => ServicesCheckoutPage(),
         settings: data,
       );
     },

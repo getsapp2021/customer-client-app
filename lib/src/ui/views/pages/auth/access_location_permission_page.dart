@@ -46,8 +46,12 @@ class _AccessLocationPermissionPageState
                           child: GRoundedButton(
                             onPressed: () => model.askPermission(),
                             color: ThemeColors.primary,
-                            text: "Allow Access",
-                            textColor: ThemeColors.white,
+                            child: Text(
+                              "Allow Access",
+                              style: TextStyle(
+                                color: ThemeColors.white,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -57,8 +61,10 @@ class _AccessLocationPermissionPageState
                             model.navigateTo(Routes.searchLocationPage),
                         color: ThemeColors.white,
                         borderColor: ThemeColors.black,
-                        text: "Enter Manually",
-                        textColor: ThemeColors.black,
+                        child: Text(
+                          "Enter Manually",
+                          style: TextStyle(color: ThemeColors.black),
+                        ),
                       ),
                       SizedBox(height: 20),
                     ],

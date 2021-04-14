@@ -1,5 +1,7 @@
 import 'package:customer/src/app/router.gr.dart';
 import 'package:customer/src/ui/utils/themes.dart';
+import 'package:customer/src/ui/views/widgets/bottomsheet/setup_bottom_sheet_ui.dart';
+import 'package:customer/src/ui/views/widgets/bottomsheet/setup_dialog_ui.dart';
 import 'package:flutter/material.dart' hide Router;
 import 'package:flutter/services.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -10,7 +12,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   setupLocator();
-  // setupDialogUi();
+  setupDialogUi();
+  setupBottomSheetUi();
   runApp(MyApp());
 }
 
@@ -26,7 +29,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: MyTheme.lightTheme(context),
-      initialRoute: Routes.homePage,
+      initialRoute: Routes.storeHomePage,
       onGenerateRoute: Router().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,
     );

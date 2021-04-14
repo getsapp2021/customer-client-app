@@ -13,6 +13,7 @@ import 'package:stacked/stacked.dart';
 class HomePage extends StatelessWidget {
   final AuthenticationService _authenticationService =
       locator<AuthenticationService>();
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
@@ -29,8 +30,10 @@ class HomePage extends StatelessWidget {
                           Flexible(
                               flex: 1,
                               child: GRoundedButton(
-                                text: "Home",
-                                textColor: ThemeColors.white,
+                                child: Text(
+                                  "Home",
+                                  style: TextStyle(color: ThemeColors.white),
+                                ),
                                 color: ThemeColors.primary,
                               )),
                           Flexible(

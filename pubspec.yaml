@@ -16,6 +16,9 @@ dependencies:
   cupertino_icons: ^1.0.0
   uuid: ^2.2.1
 
+  flutter_hooks:
+  table_calendar:
+
   # Firebase
   firebase_core: ^0.7.0
   firebase_auth: ^0.20.1

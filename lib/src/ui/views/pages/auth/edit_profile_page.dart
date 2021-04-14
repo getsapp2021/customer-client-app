@@ -90,7 +90,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               child: GRoundedButton(
                 onPressed: () => () {},
                 color: ThemeColors.primary,
-                text: "Save Profile",
+                child: Text("Save Profile"),
               ),
             ),
             SizedBox(
@@ -101,7 +101,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               child: GRoundedButton(
                 onPressed: () => () {},
                 color: ThemeColors.primary,
-                text: "Skip",
+                child: Text("Skip"),
               ),
             ),
           ],

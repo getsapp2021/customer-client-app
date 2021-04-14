@@ -1,1 +1,5 @@
-enum DialogType { error }
+enum DialogType {
+  Basic,
+  Form,
+  calendar,
+}

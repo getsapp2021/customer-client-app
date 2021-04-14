@@ -103,7 +103,7 @@ class SignInPage extends StatelessWidget {
                       child: GRoundedButton(
                         onPressed: () => model.performSendOtp(),
                         color: ThemeColors.primary,
-                        text: "Sign In",
+                        child: Text("Sign In"),
                       ),
                     ),
                   ),

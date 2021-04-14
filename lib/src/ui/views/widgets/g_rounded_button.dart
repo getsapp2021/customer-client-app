@@ -4,41 +4,35 @@ import 'package:flutter/material.dart';
 class GRoundedButton extends StatelessWidget {
   final Color color;
   final Color borderColor;
-  final Color textColor;
+  // final Color textColor;
   final Icon icon;
-  final String text;
-  final TextStyle textStyle;
+  // final String text;
+  // final TextStyle textStyle;
   final Function onPressed;
-  const GRoundedButton(
-      {Key key,
-      this.color,
-      this.icon,
-      this.text,
-      this.borderColor,
-      this.textColor,
-      this.textStyle,
-      @required this.onPressed})
-      : super(key: key);
+  final double height;
+  final double width;
+  final double borderRadius;
+  final Widget child;
+
+  const GRoundedButton({Key key, this.color, this.borderColor, this.icon, this.onPressed, this.height, this.width, this.borderRadius, this.child}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-
+    double _height = MediaQuery.of(context).size.height;
+    double _width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: onPressed,
       child: Container(
-        height: height * 0.065,
+        height: height == null ? _height * 0.2 : height,
+        width: width == null ? _width * 0.2 : width,
         decoration: BoxDecoration(
             color: color,
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.circular(borderRadius == null ? 50 : borderRadius),
             border:
                 Border.all(color: borderColor != null ? borderColor : color)),
         child: Center(
           child: icon == null
-              ? Text(
-                  "$text",
-                  style:
-                      TextStyle(color: textColor, fontWeight: FontWeight.bold),
-                )
+              ? child
               : icon,
         ),
       ),

@@ -1,0 +1,4 @@
+enum ServiceDay{
+  earliestAvailable,
+  scheduleForLater
+}
