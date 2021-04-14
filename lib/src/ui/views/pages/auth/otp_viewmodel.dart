@@ -1,5 +1,7 @@
 import 'package:customer/src/app/locator.dart';
+import 'package:customer/src/core/errors/failure.dart';
 import 'package:customer/src/core/models/phone_number.dart';
+import 'package:customer/src/ui/utils/helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -7,26 +9,33 @@ import 'package:customer/src/core/services/authentication_service.dart';
 import 'package:customer/src/app/router.gr.dart';
 import 'package:customer/src/app/gets_extensions.dart';
 
+enum SendOTPState { None, Sending, Sent }
+
 class OtpViewModel extends BaseViewModel {
   final NavigationService _navigationService = locator<NavigationService>();
   final AuthenticationService _authenticationService =
-  locator<AuthenticationService>();
+      locator<AuthenticationService>();
+  final DialogService dialogService = locator<DialogService>();
 
   bool _enableResendOtpButton;
+
   bool get enableResendOtpButton => _enableResendOtpButton;
 
   int _secondsToWait;
+
   int get secondsToWait => _secondsToWait;
 
-  String _smsOtp;
-  set smsOtp(String value) => _smsOtp = value;
+  SendOTPState _resendOTPState = SendOTPState.None;
+
+  SendOTPState get resendOTPState => _resendOTPState;
 
   final GlobalKey<FormState> otpFormKey = GlobalKey<FormState>();
-  final TextEditingController otpTextEditingController = TextEditingController();
+  final TextEditingController otpTextEditingController =
+      TextEditingController();
 
   PhoneNumber phoneNumber;
 
-  void initialise(PhoneNumber phoneNumber){
+  void initialise(PhoneNumber phoneNumber) {
     _enableResendOtpButton = false;
     _secondsToWait = 60;
     this.phoneNumber = phoneNumber;
@@ -40,30 +49,38 @@ class OtpViewModel extends BaseViewModel {
 
   void timeExpired() {
     _enableResendOtpButton = true;
+
+    if (_resendOTPState == SendOTPState.Sent) {
+      _resendOTPState = SendOTPState.None;
+    }
+
     notifyListeners();
   }
 
-
-  void performVerifyOtp() => performTryOrFailure(() async {
+  void performVerifyOtp() => performTryOrHandleFailure(() async {
         if (!otpFormKey.currentState.validate()) return;
 
-        otpFormKey.currentState.save();
         setBusy(true);
-        bool isFirstTimeUser = await _authenticationService.verifyOtp(_smsOtp);
-
-        if (isFirstTimeUser) {
-          await _authenticationService.registerCurrentUser(phoneNumber);
-          setBusy(false);
-          return _navigationService.replaceWith(Routes.editProfilePage);
-        }
+        await _authenticationService.verifyOtp(otpTextEditingController.text);
         setBusy(false);
-        _navigationService.navigateToStartupPage();
+
+        _navigationService.replaceWith(Routes.editProfilePage);
       });
 
-  void resendOtp(PhoneNumber phoneNumber) {
-    print("Resending the OTP...");
+  void resendOtp(PhoneNumber phoneNumber) async {
     otpTextEditingController.clear();
-    _authenticationService.sendOtp(phoneNumber.completeNumber);
-    _resetTimer();
+    _resendOTPState = SendOTPState.Sending;
+    notifyListeners();
+    await _authenticationService.sendOtp(
+      phoneNumber,
+      isResending: true,
+      onAutomaticVerificationCompleted: () =>
+          _navigationService.replaceWith(Routes.editProfilePage),
+      onCodeSent: () {
+        _resendOTPState = SendOTPState.Sent;
+        _resetTimer();
+      },
+      onVerificationFailed: (error) => showErrorDialog(error.message),
+    );
   }
 }

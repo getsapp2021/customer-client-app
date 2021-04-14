@@ -1,3 +1,4 @@
+import 'package:customer/src/app/router.gr.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:customer/src/app/locator.dart';
@@ -9,7 +10,7 @@ class AccessLocationPermissionViewModel extends BaseViewModel {
 
   void initialise() async {
     await _permissionService.isAllRequiredLocationPermissionsGranted;
-    print("directly redirecting");
+    _navigationService.replaceWith(Routes.searchLocationPage);
   }
 
   void navigateTo(String routeName) {

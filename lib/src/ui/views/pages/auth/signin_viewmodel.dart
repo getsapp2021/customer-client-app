@@ -1,5 +1,6 @@
 import 'package:customer/src/core/models/phone_number.dart';
 import 'package:customer/src/core/services/authentication_service.dart';
+import 'package:customer/src/ui/utils/helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -17,16 +18,30 @@ class SigninViewModel extends BaseViewModel {
 
   final GlobalKey<FormState> phoneNumberFormKey = GlobalKey<FormState>();
 
-  void performSendOtp() => performTryOrFailure(() async {
-        if (!phoneNumberFormKey.currentState.validate()) return;
-
-        phoneNumberFormKey.currentState.save();
-        setBusy(true);
-        await _authenticationService.sendOtp(phoneNumber.completeNumber);
-        setBusy(false);
-        _navigationService.navigateTo(
-          Routes.otpPage,
-          arguments: OtpPageArguments(phoneNumber: phoneNumber),
-        );
-      });
+  void performSendOtp() => performTryOrHandleFailure(
+        () async {
+          if (!phoneNumberFormKey.currentState.validate()) return;
+          phoneNumberFormKey.currentState.save();
+          print(phoneNumber);
+          setBusy(true);
+          await _authenticationService.sendOtp(
+            phoneNumber,
+            onAutomaticVerificationCompleted: () {
+              setBusy(false);
+              _navigationService.replaceWith(Routes.editProfilePage);
+            },
+            onCodeSent: () {
+              setBusy(false);
+              _navigationService.navigateTo(
+                Routes.otpPage,
+                arguments: OtpPageArguments(phoneNumber: phoneNumber),
+              );
+            },
+            onVerificationFailed: (error) {
+              setBusy(false);
+              showErrorDialog(error.message);
+            },
+          );
+        },
+      );
 }

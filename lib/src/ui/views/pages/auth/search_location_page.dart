@@ -13,7 +13,6 @@ class SearchLocationPage extends StatefulWidget {
 final _searchController = TextEditingController();
 
 class _SearchLocationPageState extends State<SearchLocationPage> {
-  // static const String placesApi = "AIzaSyAc1T_GRwqrpiA6kTTbbQROaj0_PG19IJ4";
 
   @override
   void dispose() {
@@ -123,5 +122,9 @@ class AddressSearch extends SearchDelegate {
               );
       },
     );
+  }
+
+  @override
+  PreferredSizeWidget buildBottom(BuildContext context){
   }
 }

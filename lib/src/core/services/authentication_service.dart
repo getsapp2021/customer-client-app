@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:customer/src/core/errors/failure.dart';
 import 'package:customer/src/core/models/phone_number.dart';
 import 'package:customer/src/core/models/user_profile.dart';
@@ -5,26 +6,22 @@ import 'package:customer/src/core/services/user_profile_service.dart';
 import 'package:customer/src/core/utils/enums/auth_status.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:customer/src/app/locator.dart';
-import 'package:customer/src/core/utils/extensions/firebase_auth_exception_extension.dart';
+import 'package:customer/src/app/gets_extensions.dart';
+import 'package:customer/src/core/services/base/authentication_service.dart';
+import 'package:customer/src/app/helper.dart';
+import 'package:logger/logger.dart';
 
-abstract class AuthenticationServiceBase {
-  bool get isUserLoggedIn;
-  Future<UserProfile> get currentUserProfile;
-  Stream<AuthStatus> get onAuthStatusChanged;
+class AuthenticationService implements AuthenticationServiceBase {
+  @override
+  Logger logger = getLogger("AuthenticationService");
 
-  Future<void> sendOtp(String completePhoneNumber);
-  Future<void> verifyOtp(String smsOtp);
-
-  signOut();
-}
-
-class AuthenticationService extends AuthenticationServiceBase {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth = locator<FirebaseAuth>();
   final UserProfileService _userProfileService = locator<UserProfileService>();
 
   PhoneAuthCredential _phoneAuthCredential;
   String _verificationId;
   int _forceResendingToken;
+  PhoneNumber _phoneNumber;
 
   bool get isUserLoggedIn => _firebaseAuth.currentUser != null;
 
@@ -42,98 +39,147 @@ class AuthenticationService extends AuthenticationServiceBase {
   Future<void> signOut() => _firebaseAuth.signOut();
 
   @override
-  Future<void> sendOtp(String completePhoneNumber) async {
-    if (_forceResendingToken == null) {
-      print("Intialized Phone Authentication for $completePhoneNumber");
-    } else {
-      print("Resending OTP for $completePhoneNumber");
-    }
-    void verificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-      print("Auto verificationCompleted for $completePhoneNumber");
+  Future<void> sendOtp(
+    PhoneNumber phoneNumber, {
+    void Function() onAutomaticVerificationCompleted,
+    void Function() onCodeSent,
+    void Function(Failure failure) onVerificationFailed,
+    void Function() onCodeAutoRetrievalTimeout,
+    bool isResending = false,
+  }) async {
+    _phoneNumber = phoneNumber;
+    if (!isResending) _forceResendingToken = null;
+
+    void verificationCompleted(PhoneAuthCredential phoneAuthCredential) async {
+      logger.i("[sendOtp]: verificationCompleted");
 
       this._phoneAuthCredential = phoneAuthCredential;
-      _login();
+      await signIn();
+
+      if (onAutomaticVerificationCompleted != null)
+        onAutomaticVerificationCompleted();
     }
 
     void verificationFailed(FirebaseAuthException error) {
-      print("verificationFailed for $completePhoneNumber: $error");
-      throw Failure(message: error.getErrorMessageToDisplay);
+      logger.e("[sendOtp]: verificationFailed", error, error.stackTrace);
+
+      if (onVerificationFailed != null)
+        onVerificationFailed(Failure(message: error.getErrorMessageToDisplay));
     }
 
     void codeSent(String verificationId, [int forceResendingToken]) {
-      print("codeSent for $completePhoneNumber");
+      logger.i("[sendOtp]: codeSent");
 
       this._verificationId = verificationId;
       this._forceResendingToken = forceResendingToken;
+
+      if (onCodeSent != null) onCodeSent();
     }
 
     void codeAutoRetrievalTimeout(String verificationId) {
-      print('codeAutoRetrievalTimeout for $completePhoneNumber');
+      logger.i("[sendOtp]: codeAutoRetrievalTimeout");
+      _verificationId = verificationId;
+
+      if (onCodeAutoRetrievalTimeout != null) onCodeAutoRetrievalTimeout();
     }
 
     try {
+      if (_forceResendingToken == null)
+        logger.i(
+            "[sendOtp]: Sending verification code to ${phoneNumber.completeNumber}");
+      else
+        logger.i(
+            "[sendOtp]: Resending verification code to ${phoneNumber.completeNumber}");
       await _firebaseAuth.verifyPhoneNumber(
-        phoneNumber: completePhoneNumber,
-        timeout: Duration(seconds: 60),
+        phoneNumber: phoneNumber.completeNumber,
+        timeout: Duration(seconds: 120),
         verificationCompleted: verificationCompleted,
         verificationFailed: verificationFailed,
         codeSent: codeSent,
         codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
         forceResendingToken: _forceResendingToken,
       );
-    } on FirebaseAuthException catch (e) {
-      print("A firebase auth exception has occured: $e");
+    } on FirebaseAuthException catch (e, s) {
+      logger.e("[sendOtp]: A firebase auth exception has occurred.", e, s);
       throw Failure(message: e.getErrorMessageToDisplay);
     }
   }
 
   @override
-  Future<bool> verifyOtp(String smsOtp) async {
-    print("Manually Verifying Phone number: $_verificationId, $smsOtp");
-    try{
+  Future<void> verifyOtp(String smsOtp) async {
+    logger.i(
+        "[verifyOtp]: Manually Verifying Phone number: ${_phoneNumber.completeNumber}, $_verificationId, $smsOtp");
+    try {
       this._phoneAuthCredential = PhoneAuthProvider.credential(
         verificationId: this._verificationId,
         smsCode: smsOtp,
       );
-      await _login();
-      return _isFirstTimeUser();
 
-    } on Failure{
+      await signIn();
+    } on Failure {
+      rethrow;
+    } catch (e, s) {
+      logger.e("[verifyOtp]: A general exception caught.", e, s);
+      throw Failure(
+          message: "Something went wrong, Please try again or report us!");
+    }
+  }
+
+  @override
+  Future<void> signIn() async {
+    try {
+      await _signInPhoneAuthCredential();
+
+      if (await _isFirstTimeUser()) {
+        await _registerCurrentUser();
+      }
+    } on FirebaseAuthException catch (e, s) {
+      logger.e("[_login]: A firebase auth exception has occurred.", e, s);
+      throw Failure(message: e.getErrorMessageToDisplay);
+    } on Failure {
       rethrow;
     }
-    catch(e){
-      throw Failure(message: "Something went wrong, Please try again or report us!");
-    }
+  }
 
+  @override
+  Future<void> signUp(UserProfile userProfile) {
+    return _userProfileService.createUserProfile(userProfile);
   }
 
   Future<bool> _isFirstTimeUser() async {
     return isUserLoggedIn && (await currentUserProfile) == null;
   }
 
-  Future<void> _login() async {
+  Future<void> _signInPhoneAuthCredential() async {
     try {
       await _firebaseAuth.signInWithCredential(this._phoneAuthCredential);
 
       // Reset Session
       _verificationId = null;
       _forceResendingToken = null;
-    } on FirebaseAuthException catch (e) {
-      print("A firebase auth exception has occured: $e");
+      _phoneNumber = null;
+      _phoneAuthCredential = null;
+    } on FirebaseAuthException catch (e, s) {
+      logger.e("[_login]: A firebase auth exception has occurred.", e, s);
       throw Failure(message: e.getErrorMessageToDisplay);
+    } on Failure {
+      rethrow;
     }
   }
 
-  Future<void> registerCurrentUser(PhoneNumber phoneNumber) {
+  Future<void> _registerCurrentUser() {
     User user = _firebaseAuth.currentUser;
-    if (user.phoneNumber != phoneNumber.completeNumber){
-      throw Failure(message: "Authorization Failed. Provided phone number does not match with current user's phone number.");
-    }
+
     if (user == null) throw Failure(message: "User is not logged in.");
+
+    if (user.phoneNumber != _phoneNumber?.completeNumber)
+      throw Failure(message: "Authorization Failed.");
+
     UserProfile userProfile = UserProfile(
-      phoneNumber: phoneNumber,
+      phoneNumber: _phoneNumber,
       uid: user.uid,
     );
-    return _userProfileService.createUserProfile(userProfile);
+
+    return signUp(userProfile);
   }
 }

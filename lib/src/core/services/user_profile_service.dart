@@ -17,24 +17,25 @@ class UserProfileService {
   final _userProfileAvatarBucket =
       _firebaseStorage.ref(FirebaseStorageBuckets.userProfileAvatars);
 
-  String _getUserProfileDocumnetPath(String uid) =>
+  String _getUserProfileDocumentPath(String uid) =>
       "${FireStoreCollections.userProfiles}/$uid";
 
   Future<UserProfile> getUserProfile(String uid) =>
       _firestoreService.getDocument(
-        _getUserProfileDocumnetPath(uid),
+        _getUserProfileDocumentPath(uid),
         (snapshot) => UserProfile.fromSnapshot(snapshot),
       );
 
   Future<void> createUserProfile(UserProfile userProfile) =>
       _firestoreService.setData(
-          _getUserProfileDocumnetPath(userProfile.uid), userProfile.toMap());
+          _getUserProfileDocumentPath(userProfile.uid), userProfile.toMap());
 
   Future<void> updateUserProfile(UserProfile userProfile) {
     return _firestoreService.updateData(
-        _getUserProfileDocumnetPath(userProfile.uid), userProfile.toMap());
+        _getUserProfileDocumentPath(userProfile.uid), userProfile.toMap());
   }
 
+  // TODO: verification remaining from this line
   Future<String> uploadAvatarImageAndGetDownloadableUrl(
       File image, String imageName) async {
     final imageReference = _userProfileAvatarBucket.child(imageName);
@@ -50,7 +51,7 @@ class UserProfileService {
   Future<void> updateAvatarImageInUserProfile(String uid, String url) =>
       _firestoreService.updateData(
         FireStoreCollections.userProfiles,
-        {_FirestoreUserProfileKeys.avatarUrl: url},
+        {'avatarUrl': url},
       );
 
   Future<void> deleteAvatarImage(String imageUrl) async {
@@ -58,8 +59,4 @@ class UserProfileService {
     Reference photoRef = _firebaseStorage.refFromURL(imageUrl);
     await photoRef.delete();
   }
-}
-
-class _FirestoreUserProfileKeys {
-  static const String avatarUrl = "avatarUrl";
 }

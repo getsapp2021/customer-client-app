@@ -1,6 +1,6 @@
+import 'package:customer/src/ui/views/widgets/gets_common_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'dart:async';
 import 'package:customer/src/core/models/phone_number.dart';
 import 'package:customer/src/ui/utils/colors.dart';
 import 'package:customer/src/ui/views/widgets/g_circular_progress_indicator.dart';
@@ -19,124 +19,142 @@ class OtpPage extends StatelessWidget {
     final double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return ViewModelBuilder<OtpViewModel>.reactive(
-      viewModelBuilder: () => OtpViewModel(),
-      onModelReady: (model) => model.initialise(phoneNumber),
-      builder: (context, model, child) => Scaffold(
-        backgroundColor: ThemeColors.primaryLight,
-        appBar: AppBar(
-          backgroundColor: ThemeColors.transparent,
-          elevation: 0,
-        ),
-        body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(
-            horizontal: width * 0.07,
-            vertical: height * 0.09,
-          ),
-          physics: BouncingScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Please enter the otp sent to:",
-                style: TextStyle(
-                  fontSize: width * 0.038,
-                  color: ThemeColors.fontColor,
-                ),
-              ),
-              Text(
-                "${phoneNumber.countryCode} ${phoneNumber.number}",
-                style: TextStyle(
-                  fontSize: width * 0.045,
-                  fontWeight: FontWeight.bold,
-                  color: ThemeColors.fontColor,
-                ),
-              ),
-              Form(
-                key: model.otpFormKey,
-                child: TextFormField(
-                  autofocus: true,
-                  cursorColor: ThemeColors.primary,
-                  cursorWidth: 3,
-                  controller: model.otpTextEditingController,
-                  style: TextStyle(
-                    color: ThemeColors.fontColor,
-                    fontSize: width * 0.12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.justify,
-                  maxLength: 6,
+        viewModelBuilder: () => OtpViewModel(),
+        onModelReady: (model) => model.initialise(phoneNumber),
+        builder: (context, model, child) {
+          String resendOtpText;
+          switch(model.resendOTPState){
+            case SendOTPState.None:
+              resendOtpText = "Resend OTP";
+              break;
+            case SendOTPState.Sending:
+              resendOtpText = "Resending...";
+              break;
+            case SendOTPState.Sent:
+              resendOtpText = "sent";
+              break;
+          }
 
-                  decoration: InputDecoration(
-                    hintText: "000000",
-                    counterText: "",
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.only(top: height / 20),
-                  ),
-                  onSaved: (value) => model.smsOtp = value,
-                  validator: AuthValidator.otpValidator,
-                ),
+          final bool enableResendOtpButton = model.resendOTPState == SendOTPState.None;
+          return UnFocusWrapper(
+            child: Scaffold(
+              appBar: AppBar(
+                backgroundColor: ThemeColors.transparent,
+                elevation: 0,
               ),
-              SizedBox(height: height * 0.1),
-              Row(
-                children: [
-                  Text(
-                    "Haven’t receive it yet?",
-                    style: TextStyle(
-                      fontSize: width * 0.045,
-                      color: ThemeColors.fontColor,
-                    ),
-                  ),
-                  SizedBox(
-                    width: width * 0.01,
-                  ),
-                  // otpResend(),
-                  GestureDetector(
-                    child: Text(
-                      "Resend OTP",
+              body: SingleChildScrollView(
+                padding: EdgeInsets.symmetric(
+                  horizontal: width * 0.07,
+                  vertical: height * 0.09,
+                ),
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Please enter the otp sent to:",
                       style: TextStyle(
-                        color: !model.enableResendOtpButton
-                            ? ThemeColors.fontColor
-                            : ThemeColors.primary,
-                        fontSize: width * 0.045,
+                        fontSize: width * 0.038,
+                        color: ThemeColors.fontColor,
                       ),
                     ),
-                    onTap:
-                        model.enableResendOtpButton ? () => model.resendOtp(phoneNumber) : null,
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    "Request new code in ",
-                    style: TextStyle(
-                      fontSize: width * 0.038,
-                      fontWeight: FontWeight.bold,
-                      color: ThemeColors.fontColor,
+                    Text(
+                      "${phoneNumber.countryCode} ${phoneNumber.number}",
+                      style: TextStyle(
+                        fontSize: width * 0.045,
+                        fontWeight: FontWeight.bold,
+                        color: ThemeColors.fontColor,
+                      ),
                     ),
-                  ),
-                  GCountDownTimer(
-                    secondsRemaining: model.secondsToWait,
-                    whenTimeExpires: model.timeExpired,
-                    countDownTimerStyle:TextStyle(
-                      fontSize: width * 0.038,
-                      fontWeight: FontWeight.bold,
-                      color: ThemeColors.fontColor,
+                    Form(
+                      key: model.otpFormKey,
+                      child: TextFormField(
+                        autofocus: true,
+                        cursorColor: ThemeColors.primary,
+                        cursorWidth: 3,
+                        controller: model.otpTextEditingController,
+                        style: TextStyle(
+                          color: ThemeColors.fontColor,
+                          fontSize: width * 0.12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.justify,
+                        maxLength: 6,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: "000000",
+                          counterText: "",
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.only(top: height / 20),
+                        ),
+                        validator: AuthValidator.otpValidator,
+                      ),
                     ),
-                  ),
-
-                ],
+                    SizedBox(height: height * 0.1),
+                    Row(
+                      children: [
+                        Text(
+                          "Haven’t receive it yet?",
+                          style: TextStyle(
+                            fontSize: 17,
+                            color: ThemeColors.fontColor,
+                          ),
+                        ),
+                        SizedBox(
+                          width: width * 0.01,
+                        ),
+                        // otpResend(),
+                        GestureDetector(
+                          child: Text(
+                            resendOtpText,
+                            style: TextStyle(
+                              color: !enableResendOtpButton
+                                  ? ThemeColors.fontColor
+                                  : ThemeColors.primary,
+                              fontSize: 17,
+                            ),
+                          ),
+                          onTap: enableResendOtpButton
+                              ? () => model.resendOtp(phoneNumber)
+                              : null,
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 5),
+                    Row(
+                      children: [
+                        Text(
+                          "Request new code in ",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: ThemeColors.fontColor,
+                          ),
+                        ),
+                        GCountDownTimer(
+                          secondsRemaining: model.secondsToWait,
+                          whenTimeExpires: model.timeExpired,
+                          countDownTimerStyle: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: ThemeColors.fontColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 40),
+                    model.isBusy
+                        ? GCircularProgressIndicator()
+                        : GRoundedButton(
+                            onPressed: () => model.performVerifyOtp(),
+                            color: ThemeColors.primary,
+                            text: "Verify OTP",
+                          )
+                  ],
+                ),
               ),
-              SizedBox(height: 40),
-              model.isBusy ? GCircularProgressIndicator() : GRoundedButton(
-                onPressed: () => model.performVerifyOtp(),
-                color: ThemeColors.primary,
-                text: "Verify OTP",
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
+        });
   }
 }

@@ -55,8 +55,7 @@ class _AccessLocationPermissionPageState
                       ),
                       SizedBox(height: 20),
                       GRoundedButton(
-                        onPressed: () =>
-                            model.navigateTo(Routes.searchLocationPage),
+                        onPressed: (){},
                         color: ThemeColors.white,
                         borderColor: ThemeColors.grey,
                         text: "Enter Manually",

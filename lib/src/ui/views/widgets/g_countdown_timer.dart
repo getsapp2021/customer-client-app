@@ -50,7 +50,6 @@ class _GCountDownTimerState extends State<GCountDownTimer>
 
   @override
   void initState() {
-    print("Print init state");
     super.initState();
     duration = new Duration(seconds: widget.secondsRemaining);
     _controller = new AnimationController(

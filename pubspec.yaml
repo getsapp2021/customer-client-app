@@ -15,6 +15,7 @@ dependencies:
   # UI helpers
   cupertino_icons: ^1.0.0
   uuid: ^2.2.1
+  flash: ^1.5.1
 
   # Firebase
   firebase_core: ^0.7.0

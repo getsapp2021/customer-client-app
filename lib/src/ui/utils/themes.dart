@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class MyTheme {
   static ThemeData lightTheme(BuildContext context) => ThemeData(
         primaryColor: ThemeColors.primary,
+        accentColor: ThemeColors.primaryLight,
         fontFamily: "poppins",
       );
 

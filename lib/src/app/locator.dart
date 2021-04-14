@@ -3,6 +3,7 @@ import 'package:customer/src/core/services/firestore_service.dart';
 import 'package:customer/src/core/services/user_profile_service.dart';
 import 'package:customer/src/core/utils/g_log_printer.dart';
 import 'package:customer/src/core/services/location_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -20,6 +21,6 @@ void setupLocator() {
   // Third Party Services
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
+  locator.registerLazySingleton(() => FirebaseAuth.instance);
 
-  locator.registerLazySingleton(() => Logger(printer: GLogPrinter()));
 }

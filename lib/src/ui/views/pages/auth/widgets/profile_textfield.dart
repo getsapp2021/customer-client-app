@@ -33,7 +33,7 @@ class ProfileTextField extends StatelessWidget {
           ),
         ],
         // color: ThemeColors.white,
-        borderRadius: BorderRadius.circular(50),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -44,22 +44,24 @@ class ProfileTextField extends StatelessWidget {
         ),
         controller: controller,
         readOnly: !enabled,
+
         decoration: InputDecoration(
+          prefixIcon: icon,
           contentPadding: EdgeInsets.all(16),
           hintText: hintText,
           filled: true,
           fillColor: Colors.white,
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(50)),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide(color: ThemeColors.white),
           ),
 
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(50)),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: const BorderSide(color: ThemeColors.white),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(50)),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
             borderSide: BorderSide(color: ThemeColors.primary),
           ),
         ),
