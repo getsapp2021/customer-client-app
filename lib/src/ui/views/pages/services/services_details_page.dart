@@ -39,9 +39,11 @@ class ServicesDetailsPage extends StatelessWidget {
                               height: 30,
                               child: GRoundedButton(
                                 onPressed: () {},
-                                child: Text(
-                                  "4.6",
-                                  style: TextStyle(color: ThemeColors.primary),
+                                child: Row(
+                                  children:[ Icon(Icons.star_border_outlined),Text(
+                                    "4.6",
+                                    style: TextStyle(color: ThemeColors.primary),
+                                  ),]
                                 ),
                                 borderColor: ThemeColors.primary,
                               )),
@@ -113,31 +115,46 @@ class ServicesDetailsPage extends StatelessWidget {
                       children: [
                         Column(
                           children: [
-                            CircleAvatar(
-                              radius: 15,
+                            GRoundedButton(
+                              height: 50,
+                              width: 50,
+                              borderColor: ThemeColors.primary,
                               child: Icon(Icons.phone),
                             ),
-                            Text("Call")
+                            Text(
+                              "Call",
+                              style: TextStyle(color: ThemeColors.primary),
+                            )
                           ],
                         ),
                         SizedBox(width: 20),
                         Column(
                           children: [
-                            CircleAvatar(
-                              radius: 15,
+                            GRoundedButton(
+                              height: 50,
+                              width: 50,
+                              borderColor: ThemeColors.primary,
                               child: Icon(Icons.chat),
                             ),
-                            Text("Chat")
+                            Text(
+                              "Chat",
+                              style: TextStyle(color: ThemeColors.primary),
+                            )
                           ],
                         ),
                         SizedBox(width: 10),
                         Column(
                           children: [
-                            CircleAvatar(
-                              radius: 15,
+                            GRoundedButton(
+                              height: 50,
+                              width: 50,
+                              borderColor: ThemeColors.primary,
                               child: Icon(Icons.location_on_outlined),
                             ),
-                            Text("Locate")
+                            Text(
+                              "Locate",
+                              style: TextStyle(color: ThemeColors.primary),
+                            )
                           ],
                         ),
                       ],
@@ -155,7 +172,9 @@ class ServicesDetailsPage extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               children: [
-                ServiceProductItem(onTap: model.showCheckoutDialog,),
+                ServiceProductItem(
+                  onTap: model.showCheckoutDialog,
+                ),
                 ServiceProductItem(),
                 ServiceProductItem(),
                 ServiceProductItem(),
@@ -185,11 +204,20 @@ class ServicesDetailsPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: ListTile(
-              title: Text("Total Payout", style: TextStyle(color: ThemeColors.white),),
-              subtitle: Text("Rs.99,999", style: TextStyle(color: ThemeColors.white),),
+              title: Text(
+                "Total Payout",
+                style: TextStyle(color: ThemeColors.white),
+              ),
+              subtitle: Text(
+                "Rs.99,999",
+                style: TextStyle(color: ThemeColors.white),
+              ),
               trailing: TextButton(
                 onPressed: () => model.navigateTo(Routes.servicesCheckoutPage),
-                child: Text("BOOK NOW", style: TextStyle(color: ThemeColors.white, fontSize: 18),),
+                child: Text(
+                  "BOOK NOW",
+                  style: TextStyle(color: ThemeColors.white, fontSize: 18),
+                ),
               ),
             ),
           ),

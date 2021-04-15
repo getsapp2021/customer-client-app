@@ -22,51 +22,53 @@ class _ServicesCheckoutPageState extends State<ServicesCheckoutPage> {
       backgroundColor: Colors.transparent,
       builder: (BuildContext bc) {
         return Container(
-          height: double.infinity,
+          height: MediaQuery.of(context).size.height,
           color: ThemeColors.white,
-          child: TableCalendar(
-            initialCalendarFormat: CalendarFormat.month,
-            calendarStyle: CalendarStyle(
-                todayColor: Colors.blue,
-                selectedColor: ThemeColors.primary,
-                todayStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22.0,
-                    color: ThemeColors.white)
-            ),
-            headerStyle: HeaderStyle(
-              centerHeaderTitle: true,
-              formatButtonDecoration: BoxDecoration(
-                color: ThemeColors.primary,
-                borderRadius: BorderRadius.circular(22.0),
+          child: SingleChildScrollView(
+            child: TableCalendar(
+              initialCalendarFormat: CalendarFormat.month,
+              calendarStyle: CalendarStyle(
+                  todayColor: Colors.blue,
+                  selectedColor: ThemeColors.primary,
+                  todayStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22.0,
+                      color: ThemeColors.white)
               ),
-              formatButtonTextStyle: TextStyle(color: ThemeColors.white),
-              formatButtonShowsNext: false,
+              headerStyle: HeaderStyle(
+                centerHeaderTitle: true,
+                formatButtonDecoration: BoxDecoration(
+                  color: ThemeColors.primary,
+                  borderRadius: BorderRadius.circular(22.0),
+                ),
+                formatButtonTextStyle: TextStyle(color: ThemeColors.white),
+                formatButtonShowsNext: false,
+              ),
+              startingDayOfWeek: StartingDayOfWeek.monday,
+              builders: CalendarBuilders(
+                selectedDayBuilder: (context, date, events) => Container(
+                    margin: const EdgeInsets.all(5.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: ThemeColors.primary,
+                        borderRadius: BorderRadius.circular(8.0)),
+                    child: Text(
+                      date.day.toString(),
+                      style: TextStyle(color: ThemeColors.white),
+                    )),
+                todayDayBuilder: (context, date, events) => Container(
+                    margin: const EdgeInsets.all(5.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: ThemeColors.primary,
+                        borderRadius: BorderRadius.circular(8.0)),
+                    child: Text(
+                      date.day.toString(),
+                      style: TextStyle(color: ThemeColors.white),
+                    )),
+              ),
+              calendarController: _calendarController,
             ),
-            startingDayOfWeek: StartingDayOfWeek.monday,
-            builders: CalendarBuilders(
-              selectedDayBuilder: (context, date, events) => Container(
-                  margin: const EdgeInsets.all(5.0),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: ThemeColors.primary,
-                      borderRadius: BorderRadius.circular(8.0)),
-                  child: Text(
-                    date.day.toString(),
-                    style: TextStyle(color: ThemeColors.white),
-                  )),
-              todayDayBuilder: (context, date, events) => Container(
-                  margin: const EdgeInsets.all(5.0),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: ThemeColors.primary,
-                      borderRadius: BorderRadius.circular(8.0)),
-                  child: Text(
-                    date.day.toString(),
-                    style: TextStyle(color: ThemeColors.white),
-                  )),
-            ),
-            calendarController: _calendarController,
           ),
         );
       },

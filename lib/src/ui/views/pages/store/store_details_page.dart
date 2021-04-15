@@ -67,7 +67,9 @@ class StoreDetailsPage extends StatelessWidget {
                           child: Text("64GB"),
                           borderColor: ThemeColors.gray,
                         ),
-                        SizedBox(width: 10,),
+                        SizedBox(
+                          width: 10,
+                        ),
                         GRoundedButton(
                           borderRadius: 10,
                           height: 40,
@@ -75,7 +77,9 @@ class StoreDetailsPage extends StatelessWidget {
                           child: Text("128GB"),
                           borderColor: ThemeColors.gray,
                         ),
-                        SizedBox(width: 10,),
+                        SizedBox(
+                          width: 10,
+                        ),
                         GRoundedButton(
                           borderRadius: 10,
                           height: 40,
@@ -282,31 +286,46 @@ class StoreDetailsPage extends StatelessWidget {
                         children: [
                           Column(
                             children: [
-                              CircleAvatar(
-                                radius: 15,
+                              GRoundedButton(
+                                height: 50,
+                                width: 50,
+                                borderColor: ThemeColors.primary,
                                 child: Icon(Icons.phone),
                               ),
-                              Text("Call")
+                              Text(
+                                "Call",
+                                style: TextStyle(color: ThemeColors.primary),
+                              )
                             ],
                           ),
                           SizedBox(width: 20),
                           Column(
                             children: [
-                              CircleAvatar(
-                                radius: 15,
+                              GRoundedButton(
+                                height: 50,
+                                width: 50,
+                                borderColor: ThemeColors.primary,
                                 child: Icon(Icons.chat),
                               ),
-                              Text("Chat")
+                              Text(
+                                "Chat",
+                                style: TextStyle(color: ThemeColors.primary),
+                              )
                             ],
                           ),
                           SizedBox(width: 10),
                           Column(
                             children: [
-                              CircleAvatar(
-                                radius: 15,
+                              GRoundedButton(
+                                height: 50,
+                                width: 50,
+                                borderColor: ThemeColors.primary,
                                 child: Icon(Icons.location_on_outlined),
                               ),
-                              Text("Locate")
+                              Text(
+                                "Locate",
+                                style: TextStyle(color: ThemeColors.primary),
+                              )
                             ],
                           ),
                         ],
