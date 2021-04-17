@@ -1,4 +1,7 @@
 import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/views/pages/home/store_home_page.dart';
+import 'package:customer/src/ui/views/pages/home/stores_by_category_page.dart';
+import 'package:customer/src/ui/views/pages/home/stores_categories_page.dart';
 import 'package:customer/src/ui/views/widgets/g_icon_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:customer/src/ui/views/widgets/g_icon_icons.dart';
@@ -26,6 +29,13 @@ class _HomeBottomBarState extends State<HomeBottomBar> {
     "Chat",
     "Account"
   ];
+
+  List navOptions = [
+    StoreHomePage(),
+    StoreCategoriesPage(),
+    StoresByCategoryPage(),
+  ];
+
   String selectedIconOption = "Store";
 
 
@@ -48,10 +58,18 @@ class _HomeBottomBarState extends State<HomeBottomBar> {
                 children: [
                   IconButton(
                     onPressed: () {
+
                       setState(() {
                         selectedIconOption = iconOption[index];
-
                       });
+                      Navigator
+                          .of(context)
+                          .pushReplacement(new MaterialPageRoute(builder: (BuildContext context) => navOptions[index]));
+                      // Navigator.pushAndRemoveUntil(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => navOptions[index]),
+                      //       (Route<dynamic> route) => false,
+                      // );
                     },
                     icon: SvgPicture.asset(
                       iconName[index],

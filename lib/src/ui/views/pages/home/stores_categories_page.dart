@@ -1,4 +1,5 @@
 import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/views/pages/home/store_home_page.dart';
 import 'package:customer/src/ui/views/pages/home/stores_listview.dart';
 import 'package:customer/src/ui/views/pages/home/stores_model.dart';
 import 'package:customer/src/ui/views/widgets/g_rounded_textfield.dart';
@@ -19,8 +20,17 @@ class StoreCategoriesPage extends StatelessWidget {
             padding: EdgeInsets.only(bottom: 10, right: 10, left: 10,top: 80),
             child: Row(
               children: [
-                Icon(Icons.keyboard_arrow_left,
-                    size: 40, color: ThemeColors.white,),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(new MaterialPageRoute(
+                        builder: (BuildContext context) => StoreHomePage()));
+                  },
+                  child: Icon(
+                    Icons.keyboard_arrow_left,
+                    size: 40,
+                    color: ThemeColors.white,
+                  ),
+                ),
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(right: 10),
