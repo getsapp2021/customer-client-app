@@ -7,6 +7,7 @@ class GRoundedTextField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final Function ontap;
+
   const GRoundedTextField(
       {Key key,
       this.fillColor,
@@ -15,30 +16,39 @@ class GRoundedTextField extends StatelessWidget {
       this.controller,
       this.ontap})
       : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
+        decoration: BoxDecoration(),
         height: 60,
-        width: 0.9 * MediaQuery.of(context).size.width,
+        width: 370,
         child: TextField(
+          style: TextStyle(
+            color: ThemeColors.body,
+          ),
           controller: controller,
           onTap: () {
             ontap();
           },
           decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 10.0,
+              ),
               prefixIcon: fieldIcon,
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(50),
+                borderSide: new BorderSide(color: ThemeColors.body),
+                borderRadius: BorderRadius.circular(15),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(50),
+                borderSide: new BorderSide(color: ThemeColors.body),
+                borderRadius: BorderRadius.circular(15),
               ),
               fillColor: fillColor,
               focusColor: fillColor,
               filled: true,
               hintText: hintText,
-              hintStyle: TextStyle(color: ThemeColors.black)),
+              hintStyle: TextStyle(color: ThemeColors.body)),
         ));
   }
 }

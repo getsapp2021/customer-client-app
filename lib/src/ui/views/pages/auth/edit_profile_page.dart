@@ -18,7 +18,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: ThemeColors.background,
+      backgroundColor: ThemeColors.pageBackground,
       appBar: AppBar(
 
         leading: GestureDetector(
@@ -27,7 +27,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           },
           child: Icon(Icons.arrow_back_ios,color: ThemeColors.black,),
         ),
-        backgroundColor: ThemeColors.background,
+        backgroundColor: ThemeColors.pageBackground,
         elevation: 0,
       ),
       body: SingleChildScrollView(

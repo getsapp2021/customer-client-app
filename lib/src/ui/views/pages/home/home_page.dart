@@ -29,6 +29,7 @@ class HomePage extends StatelessWidget {
                           Flexible(
                               flex: 1,
                               child: GRoundedButton(
+                                onPressed: () {},
                                 text: "Home",
                                 textColor: ThemeColors.white,
                                 color: ThemeColors.primary,

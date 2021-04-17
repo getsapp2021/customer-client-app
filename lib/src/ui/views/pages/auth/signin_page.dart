@@ -17,7 +17,7 @@ class SignInPage extends StatelessWidget {
     return ViewModelBuilder<SigninViewModel>.reactive(
       viewModelBuilder: () => SigninViewModel(),
       builder: (context, model, child) => Scaffold(
-        backgroundColor: ThemeColors.background,
+        backgroundColor: ThemeColors.pageBackground,
         body: OrientationBuilder(
           builder: (context, orientation) {
             return SingleChildScrollView(
