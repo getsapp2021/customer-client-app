@@ -16,8 +16,14 @@ dependencies:
   cupertino_icons: ^1.0.0
   uuid: ^2.2.1
 
+  # BottomSheet service
   flutter_hooks:
+
+  # Displaying Calendar
   table_calendar:
+
+  # Rating Stars
+  smooth_star_rating: ^1.1.1
 
   # Firebase
   firebase_core: ^0.7.0

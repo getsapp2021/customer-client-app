@@ -3,7 +3,7 @@ import 'package:geocoder/geocoder.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:stacked/stacked.dart';
 import 'package:customer/src/app/router.gr.dart';
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 import 'package:customer/src/ui/views/pages/auth/search_location_result_detail_viewmodel.dart';
 import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
 import 'package:customer/src/ui/views/widgets/g_rounded_textfield.dart';

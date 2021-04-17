@@ -1,5 +1,5 @@
 import 'package:customer/src/core/utils/enums/service_day.dart';
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 import 'package:customer/src/ui/views/pages/services/service_checkout_viewmodel.dart';
 import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,8 +33,7 @@ class _ServicesCheckoutPageState extends State<ServicesCheckoutPage> {
                   todayStyle: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 22.0,
-                      color: ThemeColors.white)
-              ),
+                      color: ThemeColors.white)),
               headerStyle: HeaderStyle(
                 centerHeaderTitle: true,
                 formatButtonDecoration: BoxDecoration(
@@ -74,7 +73,6 @@ class _ServicesCheckoutPageState extends State<ServicesCheckoutPage> {
       },
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -176,10 +174,11 @@ class _ServicesCheckoutPageState extends State<ServicesCheckoutPage> {
                         child: Column(
                           children: [
                             Container(
-                              margin: EdgeInsets.only(left: 20,right: 20),
+                              margin: EdgeInsets.only(left: 20, right: 20),
                               height: 70,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text("Select a date for\nthe booking"),
                                   Align(
@@ -192,8 +191,8 @@ class _ServicesCheckoutPageState extends State<ServicesCheckoutPage> {
                                       borderRadius: 10,
                                       child: Text(
                                         "Date",
-                                        style:
-                                            TextStyle(color: ThemeColors.primary),
+                                        style: TextStyle(
+                                            color: ThemeColors.primary),
                                       ),
                                     ),
                                   )
@@ -201,10 +200,11 @@ class _ServicesCheckoutPageState extends State<ServicesCheckoutPage> {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.only(left: 20,right: 20),
+                              margin: EdgeInsets.only(left: 20, right: 20),
                               height: 70,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text("Select a time for\nthe booking"),
                                   Align(
@@ -216,8 +216,8 @@ class _ServicesCheckoutPageState extends State<ServicesCheckoutPage> {
                                       width: 70,
                                       child: Text(
                                         "Time",
-                                        style:
-                                        TextStyle(color: ThemeColors.primary),
+                                        style: TextStyle(
+                                            color: ThemeColors.primary),
                                       ),
                                     ),
                                   )
@@ -226,26 +226,32 @@ class _ServicesCheckoutPageState extends State<ServicesCheckoutPage> {
                             )
                           ],
                         )),
-                    SizedBox(height: 40,),
+                    SizedBox(
+                      height: 40,
+                    ),
                     Center(
                       child: Text(
                         "Request booking for",
-                        style: TextStyle(fontWeight: FontWeight.bold,
-                        fontSize: 16),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                     ),
                     Center(
                       child: Text(
                         "Tuesday, January 01, 2022",
-                        style: TextStyle(fontWeight: FontWeight.bold,
-                            fontSize: 22, color: ThemeColors.gray),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                            color: ThemeColors.body),
                       ),
                     ),
                     Center(
                       child: Text(
                         "AT 00:00",
-                        style: TextStyle(fontWeight: FontWeight.bold,
-                            fontSize: 22, color: ThemeColors.gray),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                            color: ThemeColors.body),
                       ),
                     ),
                   ],
@@ -258,7 +264,11 @@ class _ServicesCheckoutPageState extends State<ServicesCheckoutPage> {
                 height: 50,
                 borderRadius: 10,
                 color: ThemeColors.primary,
-                child: Center(child: Text("BOOK NOW", style: TextStyle(fontSize: 16, color: ThemeColors.white),)),
+                child: Center(
+                    child: Text(
+                  "BOOK NOW",
+                  style: TextStyle(fontSize: 16, color: ThemeColors.white),
+                )),
               ),
             ),
           );

@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       title: 'Gets Customer App',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
-      theme: MyTheme.lightTheme(context),
+      theme: GTheme.lightTheme(context),
       initialRoute: Routes.storeHomePage,
       onGenerateRoute: Router().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,

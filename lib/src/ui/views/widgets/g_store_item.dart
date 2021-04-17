@@ -1,4 +1,4 @@
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 import 'package:flutter/material.dart';
 
 class GStoreItem extends StatelessWidget {

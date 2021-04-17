@@ -1,6 +1,6 @@
 import 'package:customer/src/app/locator.dart';
 import 'package:customer/src/core/services/authentication_service.dart';
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 import 'package:customer/src/ui/views/pages/home/home_viewmodel.dart';
 import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
 import 'package:customer/src/ui/views/widgets/g_rounded_textfield.dart';

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:customer/src/app/locator.dart';
 import 'package:customer/src/core/utils/enums/bottom_sheet_type.dart';
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -47,13 +47,13 @@ class _FloatingBoxBottomSheet extends StatelessWidget {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: ThemeColors.gray,
+              color: ThemeColors.grey,
             ),
           ),
           SizedBox(height: 10),
           Text(
             request.description,
-            style: TextStyle(color: ThemeColors.gray),
+            style: TextStyle(color: ThemeColors.grey),
           ),
           Row(
             mainAxisSize: MainAxisSize.max,

@@ -1,5 +1,5 @@
 import 'package:customer/src/core/models/suggestion.dart';
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 import 'package:customer/src/ui/views/pages/auth/search_location_viewmodel.dart';
 import 'package:customer/src/ui/views/widgets/g_rounded_textfield.dart';
 import 'package:flutter/material.dart';

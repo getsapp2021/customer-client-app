@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 import 'package:stacked/stacked.dart';
 
 class GAddToCartViewModel extends BaseViewModel {

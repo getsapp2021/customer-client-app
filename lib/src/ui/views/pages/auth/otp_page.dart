@@ -1,4 +1,4 @@
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 import 'package:customer/src/ui/views/pages/auth/otp_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:customer/src/ui/views/widgets/countdown_timer.dart';
@@ -18,7 +18,7 @@ class OtpPage extends StatelessWidget {
     return ViewModelBuilder<OtpViewModel>.reactive(
       viewModelBuilder: () => OtpViewModel(),
       builder: (context, model, child) => Scaffold(
-        backgroundColor: ThemeColors.background,
+        backgroundColor: ThemeColors.pageBackground,
         appBar: AppBar(
           backgroundColor: ThemeColors.primaryLight,
           elevation: 0,
@@ -60,7 +60,7 @@ class OtpPage extends StatelessWidget {
                     cursorColor: ThemeColors.primary,
                     cursorWidth: 3,
                     style: TextStyle(
-                      color: ThemeColors.gray,
+                      color: ThemeColors.grey,
                       fontSize: width*0.12,
                       fontWeight: FontWeight.bold,
                     ),
@@ -98,7 +98,7 @@ class OtpPage extends StatelessWidget {
                       "Resend OTP",
                       style: TextStyle(
                           color: !model.enableResendOtpButton
-                              ? ThemeColors.gray
+                              ? ThemeColors.grey
                               : ThemeColors.primary,
                           fontSize: width*0.045),
                     ),

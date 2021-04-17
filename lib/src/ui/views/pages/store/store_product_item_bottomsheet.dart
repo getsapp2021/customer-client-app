@@ -1,4 +1,4 @@
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -33,15 +33,15 @@ class StoreProductItemBottomSheet extends StatelessWidget {
               children: [
                 GRoundedButton(
                   child: Text("64GB"),
-                  borderColor: ThemeColors.gray,
+                  borderColor: ThemeColors.grey,
                 ),
                 GRoundedButton(
                   child: Text("128GB"),
-                  borderColor: ThemeColors.gray,
+                  borderColor: ThemeColors.grey,
                 ),
                 GRoundedButton(
                   child: Text("256GB"),
-                  borderColor: ThemeColors.gray,
+                  borderColor: ThemeColors.grey,
                 ),
               ],
             ),

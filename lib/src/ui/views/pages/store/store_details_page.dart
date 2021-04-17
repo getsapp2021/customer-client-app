@@ -1,10 +1,11 @@
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 import 'package:customer/src/ui/views/pages/store/store_viewmodel.dart';
 import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
 import 'package:customer/src/ui/views/widgets/g_search_bar.dart';
 import 'package:customer/src/ui/views/widgets/product_item.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class StoreDetailsPage extends StatelessWidget {
   @override
@@ -65,7 +66,7 @@ class StoreDetailsPage extends StatelessWidget {
                           height: 40,
                           width: 80,
                           child: Text("64GB"),
-                          borderColor: ThemeColors.gray,
+                          borderColor: ThemeColors.grey,
                         ),
                         SizedBox(
                           width: 10,
@@ -75,7 +76,7 @@ class StoreDetailsPage extends StatelessWidget {
                           height: 40,
                           width: 80,
                           child: Text("128GB"),
-                          borderColor: ThemeColors.gray,
+                          borderColor: ThemeColors.grey,
                         ),
                         SizedBox(
                           width: 10,
@@ -85,7 +86,7 @@ class StoreDetailsPage extends StatelessWidget {
                           height: 40,
                           width: 80,
                           child: Text("256GB"),
-                          borderColor: ThemeColors.gray,
+                          borderColor: ThemeColors.grey,
                         ),
                       ],
                     ),
@@ -108,7 +109,7 @@ class StoreDetailsPage extends StatelessWidget {
                           height: 50,
                           width: 50,
                           borderRadius: 10,
-                          color: ThemeColors.blueGrey,
+                          color: ThemeColors.body,
                         ),
                         SizedBox(
                           width: 10,
@@ -126,7 +127,7 @@ class StoreDetailsPage extends StatelessWidget {
                           height: 50,
                           width: 50,
                           borderRadius: 10,
-                          color: ThemeColors.accentColor,
+                          color: ThemeColors.pageBackground,
                         )
                       ],
                     ),
@@ -202,17 +203,30 @@ class StoreDetailsPage extends StatelessWidget {
                           children: [
                             Text(
                               "IVenus Inorbit Mall",
-                              style: TextStyle(fontSize: 18),
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                             Container(
                                 width: 60,
                                 height: 30,
                                 child: GRoundedButton(
                                   onPressed: () {},
-                                  child: Text(
-                                    "4.6",
-                                    style:
-                                        TextStyle(color: ThemeColors.primary),
+                                  borderRadius: 10,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: Row(
+                                      children: [
+                                        Icon(Icons.star_border_outlined,
+                                            color: ThemeColors.primary),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          "4.6",
+                                          style: TextStyle(
+                                              color: ThemeColors.primary,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   borderColor: ThemeColors.primary,
                                 )),
@@ -229,6 +243,7 @@ class StoreDetailsPage extends StatelessWidget {
                                   width: 60,
                                   height: 30,
                                   child: GRoundedButton(
+                                    borderRadius: 10,
                                     onPressed: () {},
                                     child: Text(
                                       "Open",
@@ -245,6 +260,7 @@ class StoreDetailsPage extends StatelessWidget {
                                   width: 60,
                                   height: 30,
                                   child: GRoundedButton(
+                                    borderRadius: 10,
                                     onPressed: () {},
                                     child: Text(
                                       "Pickup",
@@ -260,7 +276,9 @@ class StoreDetailsPage extends StatelessWidget {
                               alignment: Alignment.topRight,
                               child: Text(
                                 "2.3KM",
-                                style: TextStyle(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.italic),
                               ))
                         ],
                       ),
@@ -269,14 +287,16 @@ class StoreDetailsPage extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         "Electronics",
-                        style: TextStyle(color: ThemeColors.primary),
+                        style: TextStyle(
+                            color: ThemeColors.primary,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         "Lorem Ipsum \nLorem Ipsum \nLorem Ipsum",
-                        style: TextStyle(fontSize: 11),
+                        style: TextStyle(fontSize: 14),
                       ),
                     ),
                     Padding(
@@ -290,7 +310,10 @@ class StoreDetailsPage extends StatelessWidget {
                                 height: 50,
                                 width: 50,
                                 borderColor: ThemeColors.primary,
-                                child: Icon(Icons.phone),
+                                child: Icon(
+                                  Icons.phone,
+                                  color: ThemeColors.body,
+                                ),
                               ),
                               Text(
                                 "Call",
@@ -305,7 +328,10 @@ class StoreDetailsPage extends StatelessWidget {
                                 height: 50,
                                 width: 50,
                                 borderColor: ThemeColors.primary,
-                                child: Icon(Icons.chat),
+                                child: Icon(
+                                  Icons.chat,
+                                  color: ThemeColors.body,
+                                ),
                               ),
                               Text(
                                 "Chat",
@@ -320,7 +346,10 @@ class StoreDetailsPage extends StatelessWidget {
                                 height: 50,
                                 width: 50,
                                 borderColor: ThemeColors.primary,
-                                child: Icon(Icons.location_on_outlined),
+                                child: Icon(
+                                  Icons.location_on_outlined,
+                                  color: ThemeColors.body,
+                                ),
                               ),
                               Text(
                                 "Locate",
@@ -339,8 +368,8 @@ class StoreDetailsPage extends StatelessWidget {
               title: Text(
                 "BestSellers",
                 style: TextStyle(
-                    color: ThemeColors.black,
-                    fontSize: 18,
+                    color: ThemeColors.body,
+                    fontSize: 22,
                     fontWeight: FontWeight.bold),
               ),
               children: [
@@ -354,8 +383,8 @@ class StoreDetailsPage extends StatelessWidget {
               title: Text(
                 "Mobile Phones",
                 style: TextStyle(
-                    color: ThemeColors.black,
-                    fontSize: 18,
+                    color: ThemeColors.body,
+                    fontSize: 22,
                     fontWeight: FontWeight.bold),
               ),
               children: [

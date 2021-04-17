@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 
 class ProfileTextField extends StatelessWidget {
   final Icon icon;

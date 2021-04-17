@@ -1,5 +1,5 @@
 import 'package:customer/src/app/router.gr.dart';
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 import 'package:customer/src/ui/views/pages/services/service_details_viewmodel.dart';
 import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
 import 'package:customer/src/ui/views/widgets/g_search_bar.dart';
@@ -32,18 +32,30 @@ class ServicesDetailsPage extends StatelessWidget {
                         children: [
                           Text(
                             "IVenus Inorbit Mall",
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           Container(
                               width: 60,
                               height: 30,
                               child: GRoundedButton(
                                 onPressed: () {},
-                                child: Row(
-                                  children:[ Icon(Icons.star_border_outlined),Text(
-                                    "4.6",
-                                    style: TextStyle(color: ThemeColors.primary),
-                                  ),]
+                                borderRadius: 10,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.star_border_outlined,
+                                          color: ThemeColors.primary),
+                                      SizedBox(width: 5),
+                                      Text(
+                                        "4.6",
+                                        style: TextStyle(
+                                            color: ThemeColors.primary,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 borderColor: ThemeColors.primary,
                               )),
@@ -60,6 +72,7 @@ class ServicesDetailsPage extends StatelessWidget {
                                 width: 60,
                                 height: 30,
                                 child: GRoundedButton(
+                                  borderRadius: 10,
                                   onPressed: () {},
                                   child: Text(
                                     "Open",
@@ -75,6 +88,7 @@ class ServicesDetailsPage extends StatelessWidget {
                                 width: 60,
                                 height: 30,
                                 child: GRoundedButton(
+                                  borderRadius: 10,
                                   onPressed: () {},
                                   child: Text(
                                     "Pickup",
@@ -89,7 +103,9 @@ class ServicesDetailsPage extends StatelessWidget {
                             alignment: Alignment.topRight,
                             child: Text(
                               "2.3KM",
-                              style: TextStyle(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontStyle: FontStyle.italic),
                             ))
                       ],
                     ),
@@ -98,14 +114,16 @@ class ServicesDetailsPage extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       "Electronics",
-                      style: TextStyle(color: ThemeColors.primary),
+                      style: TextStyle(
+                          color: ThemeColors.primary,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       "Lorem Ipsum \nLorem Ipsum \nLorem Ipsum",
-                      style: TextStyle(fontSize: 11),
+                      style: TextStyle(fontSize: 14),
                     ),
                   ),
                   Padding(
@@ -119,7 +137,10 @@ class ServicesDetailsPage extends StatelessWidget {
                               height: 50,
                               width: 50,
                               borderColor: ThemeColors.primary,
-                              child: Icon(Icons.phone),
+                              child: Icon(
+                                Icons.phone,
+                                color: ThemeColors.body,
+                              ),
                             ),
                             Text(
                               "Call",
@@ -134,7 +155,10 @@ class ServicesDetailsPage extends StatelessWidget {
                               height: 50,
                               width: 50,
                               borderColor: ThemeColors.primary,
-                              child: Icon(Icons.chat),
+                              child: Icon(
+                                Icons.chat,
+                                color: ThemeColors.body,
+                              ),
                             ),
                             Text(
                               "Chat",
@@ -149,7 +173,10 @@ class ServicesDetailsPage extends StatelessWidget {
                               height: 50,
                               width: 50,
                               borderColor: ThemeColors.primary,
-                              child: Icon(Icons.location_on_outlined),
+                              child: Icon(
+                                Icons.location_on_outlined,
+                                color: ThemeColors.body,
+                              ),
                             ),
                             Text(
                               "Locate",
@@ -167,8 +194,8 @@ class ServicesDetailsPage extends StatelessWidget {
               title: Text(
                 "Gents",
                 style: TextStyle(
-                    color: ThemeColors.black,
-                    fontSize: 18,
+                    color: ThemeColors.body,
+                    fontSize: 22,
                     fontWeight: FontWeight.bold),
               ),
               children: [
@@ -184,8 +211,8 @@ class ServicesDetailsPage extends StatelessWidget {
               title: Text(
                 "Ladies",
                 style: TextStyle(
-                    color: ThemeColors.black,
-                    fontSize: 18,
+                    color: ThemeColors.body,
+                    fontSize: 22,
                     fontWeight: FontWeight.bold),
               ),
               children: [

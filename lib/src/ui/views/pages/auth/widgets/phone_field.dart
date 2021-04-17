@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'package:customer/src/core/models/phone_number.dart';
 import 'package:customer/src/core/utils/constants/countries.dart';
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 
 class IntlPhoneField extends StatefulWidget {
   final bool obscureText;
