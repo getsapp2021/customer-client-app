@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 import 'package:customer/src/app/gets_extensions.dart';
 
 class SplashPage extends StatelessWidget {

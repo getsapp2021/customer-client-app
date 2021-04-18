@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 
-import '../../../../utils/colors.dart';
+import '../../utils/theme_colors.dart';
 
-class ProfileTextField extends StatelessWidget {
-  final Icon icon;
+class GTextFormField extends StatelessWidget {
+  final Widget prefixIcon;
+  final Widget suffixIcon;
   final String hintText;
   final TextEditingController controller;
   final bool enabled;
   final String Function(String) validator;
   final Color textColor;
+  final FocusNode focusNode;
+  final bool enableInteractiveSelection;
+  final void Function(String) onChanged;
 
-  const ProfileTextField({
-    this.icon,
+  const GTextFormField({
+    this.prefixIcon,
+    this.suffixIcon,
     this.hintText,
     this.controller,
     this.enabled = true,
     this.validator,
-    this.textColor,
+    this.textColor, this.focusNode, this.enableInteractiveSelection = true, this.onChanged,
   });
 
   @override
@@ -36,6 +41,9 @@ class ProfileTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextFormField(
+        onChanged: onChanged,
+        enableInteractiveSelection: enableInteractiveSelection,
+        focusNode: focusNode,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         enabled: enabled,
         validator: validator,
@@ -46,7 +54,8 @@ class ProfileTextField extends StatelessWidget {
         readOnly: !enabled,
 
         decoration: InputDecoration(
-          prefixIcon: icon,
+          prefixIcon: prefixIcon,
+          suffixIcon: suffixIcon,
           contentPadding: EdgeInsets.all(16),
           hintText: hintText,
           filled: true,

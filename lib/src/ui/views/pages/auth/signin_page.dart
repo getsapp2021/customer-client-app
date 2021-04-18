@@ -1,4 +1,4 @@
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 import 'package:customer/src/ui/utils/validators/auth_validator.dart';
 import 'package:customer/src/ui/views/pages/auth/signin_viewmodel.dart';
 import 'package:flutter/gestures.dart';
@@ -14,7 +14,6 @@ class SignInPage extends StatelessWidget {
       viewModelBuilder: () => SigninViewModel(),
       builder: (context, model, child) => UnFocusWrapper(
         child: Scaffold(
-          backgroundColor: ThemeColors.background,
           body: SafeArea(
             child: SingleChildScrollView(
               padding: EdgeInsets.symmetric(
@@ -37,7 +36,7 @@ class SignInPage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
-                        color: ThemeColors.fontColor,
+                        color: ThemeColors.body,
                       ),
                     ),
                   ),
@@ -47,7 +46,7 @@ class SignInPage extends StatelessWidget {
                       "Login with your mobile number",
                       style: TextStyle(
                         fontSize: 17,
-                        color: ThemeColors.fontColor,
+                        color: ThemeColors.body,
                       ),
                     ),
                   ),

@@ -1,7 +1,7 @@
 import 'package:customer/src/app/helper.dart';
 import 'package:customer/src/app/locator.dart';
 import 'package:customer/src/core/errors/failure.dart';
-import 'package:customer/src/ui/utils/helper.dart';
+import 'package:customer/src/ui/utils/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 

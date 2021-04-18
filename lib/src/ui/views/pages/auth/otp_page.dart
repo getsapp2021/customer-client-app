@@ -2,7 +2,7 @@ import 'package:customer/src/ui/views/widgets/gets_common_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:customer/src/core/models/phone_number.dart';
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 import 'package:customer/src/ui/views/widgets/g_circular_progress_indicator.dart';
 import 'package:customer/src/ui/utils/validators/auth_validator.dart';
 import 'package:customer/src/ui/views/pages/auth/otp_viewmodel.dart';
@@ -55,7 +55,7 @@ class OtpPage extends StatelessWidget {
                       "Please enter the otp sent to:",
                       style: TextStyle(
                         fontSize: width * 0.038,
-                        color: ThemeColors.fontColor,
+                        color: ThemeColors.body,
                       ),
                     ),
                     Text(
@@ -63,7 +63,7 @@ class OtpPage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: width * 0.045,
                         fontWeight: FontWeight.bold,
-                        color: ThemeColors.fontColor,
+                        color: ThemeColors.body,
                       ),
                     ),
                     Form(
@@ -74,7 +74,7 @@ class OtpPage extends StatelessWidget {
                         cursorWidth: 3,
                         controller: model.otpTextEditingController,
                         style: TextStyle(
-                          color: ThemeColors.fontColor,
+                          color: ThemeColors.body,
                           fontSize: width * 0.12,
                           fontWeight: FontWeight.bold,
                         ),
@@ -97,7 +97,7 @@ class OtpPage extends StatelessWidget {
                           "Haven’t receive it yet?",
                           style: TextStyle(
                             fontSize: 17,
-                            color: ThemeColors.fontColor,
+                            color: ThemeColors.body,
                           ),
                         ),
                         SizedBox(
@@ -109,7 +109,7 @@ class OtpPage extends StatelessWidget {
                             resendOtpText,
                             style: TextStyle(
                               color: !enableResendOtpButton
-                                  ? ThemeColors.fontColor
+                                  ? ThemeColors.body
                                   : ThemeColors.primary,
                               fontSize: 17,
                             ),
@@ -128,7 +128,7 @@ class OtpPage extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: ThemeColors.fontColor,
+                            color: ThemeColors.body,
                           ),
                         ),
                         GCountDownTimer(
@@ -137,7 +137,7 @@ class OtpPage extends StatelessWidget {
                           countDownTimerStyle: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: ThemeColors.fontColor,
+                            color: ThemeColors.body,
                           ),
                         ),
                       ],

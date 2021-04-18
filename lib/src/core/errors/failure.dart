@@ -1,7 +1,8 @@
 class Failure extends Error{
   final String message;
+  final dynamic error;
 
-  Failure({this.message});
+  Failure({this.message, this.error});
 
   @override
   String toString() => 'Failure{message: $message}';

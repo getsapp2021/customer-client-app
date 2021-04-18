@@ -1,26 +1,26 @@
 import 'package:customer/src/ui/utils/validators/auth_validator.dart';
-import 'package:customer/src/ui/views/pages/auth/widgets/profile_textfield.dart';
 import 'package:customer/src/ui/views/widgets/g_circular_progress_indicator.dart';
 import 'package:customer/src/ui/views/widgets/gets_common_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 import 'package:customer/src/ui/views/widgets/g_rounded_button.dart';
 import 'package:stacked/stacked.dart';
 import 'package:customer/src/ui/views/pages/profile/edit_profile_viewmodel.dart';
 
 class EditProfilePage extends StatelessWidget {
+  final EditProfileViewModel _editProfileViewModel = EditProfileViewModel();
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return UnFocusWrapper(
       child: Scaffold(
-          backgroundColor: ThemeColors.background,
+        backgroundColor: ThemeColors.grey,
           appBar: AppBar(
             leading: CloseButton(),
             backgroundColor: ThemeColors.transparent,
             elevation: 0,
           ),
-          body: ViewModelBuilder<EditProfileViewModel>.reactive(
-            viewModelBuilder: () => EditProfileViewModel(),
+          body: ViewModelBuilder<EditProfileViewModel>.nonReactive(
+            viewModelBuilder: () => _editProfileViewModel,
             onModelReady: (model) => model.initialise(),
             builder: (context, model, child) {
               return SingleChildScrollView(
@@ -34,7 +34,7 @@ class EditProfilePage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: width * 0.062,
                         fontWeight: FontWeight.bold,
-                        color: ThemeColors.fontColor,
+                        color: ThemeColors.body,
                       ),
                     ),
                     SizedBox(height: 15),
@@ -42,7 +42,7 @@ class EditProfilePage extends StatelessWidget {
                       'Update your profile details',
                       style: TextStyle(
                         fontSize: width * 0.0425,
-                        color: ThemeColors.fontColor,
+                        color: ThemeColors.body,
                       ),
                     ),
                     SizedBox(height: 25),
@@ -50,27 +50,27 @@ class EditProfilePage extends StatelessWidget {
                       key: model.editProfileFormKey,
                       child: Column(
                         children: [
-                          ProfileTextField(
-                            icon: Icon(Icons.person_outline),
+                          GTextFormField(
+                            prefixIcon: Icon(Icons.person_outline),
                             hintText: "Full Name",
                             controller: model.nameController,
                             validator: AuthValidator.fullNameValidator,
                           ),
-                          ProfileTextField(
-                            icon: Icon(Icons.email_outlined),
+                          GTextFormField(
+                            prefixIcon: Icon(Icons.email_outlined),
                             hintText: "Email",
                             controller: model.emailController,
                             validator: AuthValidator.emailValidator,
                           ),
-                          ProfileTextField(
-                            textColor: ThemeColors.fontColor,
-                            icon: Icon(Icons.phone_android_outlined),
+                          GTextFormField(
+                            textColor: ThemeColors.body,
+                            prefixIcon: Icon(Icons.phone_android_outlined),
                             controller: model.mobileController,
                             enabled: false,
                             hintText: "98989 89898",
                           ),
-                          ProfileTextField(
-                            icon: Icon(Icons.location_on_outlined),
+                          GTextFormField(
+                            prefixIcon: Icon(Icons.location_on_outlined),
                             hintText: "Address",
                             controller: model.addressController,
                           ),

@@ -1,6 +1,6 @@
 import 'package:customer/src/core/models/phone_number.dart';
 import 'package:customer/src/core/services/authentication_service.dart';
-import 'package:customer/src/ui/utils/helper.dart';
+import 'package:customer/src/ui/utils/ui_helpers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';

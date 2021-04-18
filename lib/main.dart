@@ -1,5 +1,8 @@
+import 'package:customer/src/app/helper.dart';
 import 'package:customer/src/app/router.gr.dart';
 import 'package:customer/src/ui/utils/themes.dart';
+import 'package:customer/src/ui/views/pages/auth/search_location_page.dart';
+import 'package:customer/src/ui/views/pages/profile/edit_profile_page.dart';
 import 'package:flutter/material.dart' hide Router;
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
@@ -10,6 +13,7 @@ import 'package:customer/src/app/locator.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await loadSecrets();
   setupLocator();
   Logger.level = Level.verbose;
   // setupDialogUi();
@@ -27,8 +31,9 @@ class MyApp extends StatelessWidget {
       title: 'Gets Customer App',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
-      theme: MyTheme.lightTheme(context),
-      initialRoute: Routes.startupPage,
+      theme: GTheme.lightTheme(context),
+      home: SearchLocationPage(),
+      // initialRoute: Routes.startupPage,
       onGenerateRoute: Router().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,
 

@@ -1,4 +1,4 @@
-import 'package:customer/src/ui/utils/colors.dart';
+import 'package:customer/src/ui/utils/theme_colors.dart';
 import 'package:customer/src/ui/views/pages/auth/access_location_permission_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -57,10 +57,10 @@ class _AccessLocationPermissionPageState
                       GRoundedButton(
                         onPressed: (){},
                         color: ThemeColors.white,
-                        borderColor: ThemeColors.grey,
+                        borderColor: ThemeColors.body,
                         text: "Enter Manually",
                         textStyle: TextStyle(
-                            color: ThemeColors.grey, fontWeight: FontWeight.w600),
+                            color: ThemeColors.body, fontWeight: FontWeight.w600),
                       ),
                       SizedBox(height: 40),
                     ],

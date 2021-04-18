@@ -9,15 +9,10 @@ import 'package:stacked_services/stacked_services.dart';
 class SearchLocationResultDetailViewModel extends BaseViewModel {
   LocationService _locationService = locator<LocationService>();
   NavigationService _navigationService = locator<NavigationService>();
-  TextEditingController _placeController = TextEditingController();
-  TextEditingController _buildNoController = TextEditingController();
-  TextEditingController _landmarkController = TextEditingController();
-  GoogleMapController gmapController;
-
-  TextEditingController get placeController => _placeController;
-  TextEditingController get buildNoController => _buildNoController;
-  TextEditingController get landmarkController => _landmarkController;
-  // GoogleMapController get gmapController => _gmapController;
+  final TextEditingController placeController = TextEditingController();
+  final TextEditingController buildNoController = TextEditingController();
+  final TextEditingController landmarkController = TextEditingController();
+  GoogleMapController googleMapController;
 
   Set<Marker> markers = {};
   Marker tmp;
@@ -35,7 +30,7 @@ class SearchLocationResultDetailViewModel extends BaseViewModel {
 
   List<Address> address;
   void onMapCreated(GoogleMapController controller) {
-    gmapController = controller;
+    googleMapController = controller;
   }
 
   void addMarker(Marker newMarker) {
